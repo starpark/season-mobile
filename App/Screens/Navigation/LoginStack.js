@@ -21,7 +21,7 @@ const LoginStack = () => {
         }}
       >
         <Stack.Screen
-          name="Home"
+          name="Login"
           component={Login}
           options={{ headerShown: false, Title: "로그인" }}
         />
