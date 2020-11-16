@@ -6,6 +6,7 @@ import { StyleSheet, Text, View } from "react-native";
 import rootReducer from "../Redux/Reducers";
 import { createStore } from "redux";
 import Splash from "./Components/Splash";
+import LoginStack from "./Navigation/LoginStack";
 
 const RootScreen = () => {
   const [loading, setLoading] = useState(true);
@@ -23,13 +24,7 @@ const RootScreen = () => {
     <StoreProvider store={createStore(rootReducer)}>
       <PaperProvider>
         <StatusBar style="auto" />
-        {loading ? (
-          <Splash nowstate="Loading... TEST(1/1)" />
-        ) : (
-          <View style={styles.container}>
-            <Text>Hello, Season!</Text>
-          </View>
-        )}
+        {loading ? <Splash nowstate="Loading... TEST(1/1)" /> : <LoginStack />}
       </PaperProvider>
     </StoreProvider>
   );
