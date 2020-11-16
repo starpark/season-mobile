@@ -32,7 +32,12 @@ const LoginStack = () => {
             title: "비밀번호찾기",
             cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
             headerStyle: {
-              elevation: 0,
+              backgroundColor: "#fff",
+              shadowColor: "transparent",
+              shadowRadius: 0,
+              shadowOffset: {
+                height: 0,
+              },
             },
           }}
         />
