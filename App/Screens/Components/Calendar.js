@@ -1,16 +1,18 @@
 import * as React from "react";
 import { View, Text, Button } from "react-native";
 import Actions from "../../Redux/Actions";
+import { useDispatch } from "react-redux";
+import styles from "./styles";
 
 const Calendar = () => {
+  const dispatch = useDispatch();
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={styles.container}>
       <Text>Calendar</Text>
 
       <Button
         onPress={() => {
           dispatch(Actions.AuthAction.LOGOUT());
-          console.log(user);
         }}
         title="로그아웃"
       />

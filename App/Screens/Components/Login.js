@@ -4,13 +4,12 @@ import {
   TextInput,
   View,
   Image,
-  Button,
-  Alert,
   TouchableWithoutFeedback,
   Text,
   SafeAreaView,
+  Platform,
 } from "react-native";
-import { Checkbox, TouchableRipple } from "react-native-paper";
+import { Checkbox } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import Actions from "../../Redux/Actions";
 
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    paddingTop: Expo.Constants.statusBarHeight,
+    paddingTop: Platform.OS === "android" ? Expo.Constants.statusBarHeight : 0,
   },
   text: {
     color: "black",

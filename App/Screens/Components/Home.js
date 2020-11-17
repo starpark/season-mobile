@@ -1,13 +1,12 @@
 import * as React from "react";
 import { SafeAreaView, Text, Button } from "react-native";
 import Actions from "../../Redux/Actions";
+import styles from "./styles";
 
 const Home = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <Text>Home</Text>
-
-      <Button onPress={() => {}} title="로그아웃" />
     </SafeAreaView>
   );
 };

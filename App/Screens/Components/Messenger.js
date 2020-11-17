@@ -1,20 +1,13 @@
 import * as React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, SafeAreaView } from "react-native";
 import Actions from "../../Redux/Actions";
+import styles from "./styles";
 
 const Messenger = () => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <SafeAreaView style={styles.container}>
       <Text>Messenger</Text>
-
-      <Button
-        onPress={() => {
-          dispatch(Actions.AuthAction.LOGOUT());
-          console.log(user);
-        }}
-        title="로그아웃"
-      />
-    </View>
+    </SafeAreaView>
   );
 };
 
