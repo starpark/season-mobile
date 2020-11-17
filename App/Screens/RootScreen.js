@@ -19,10 +19,6 @@ const RootScreen = () => {
     return () => {};
   }, []);
 
-  useEffect(() => {
-    console.log(apiloading);
-  }, [apiloading]);
-
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
