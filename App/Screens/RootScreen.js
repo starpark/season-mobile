@@ -1,40 +1,54 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { Provider as StoreProvider } from "react-redux";
-import { Provider as PaperProvider } from "react-native-paper";
-import { StyleSheet, Text, View } from "react-native";
-import rootReducer from "../Redux/Reducers";
-import { createStore } from "redux";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import Splash from "./Components/Splash";
 import LoginStack from "./Navigation/LoginStack";
+import { useSelector } from "react-redux";
+import Home from "./Components/Home";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const RootScreen = () => {
   const [loading, setLoading] = useState(true);
+  const user = useSelector((state) => state.Auth);
+  const apiloading = useSelector((state) => state.API);
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-    return () => {
-      console.log("test");
-    };
+    return () => {};
   }, []);
 
+  useEffect(() => {
+    console.log(apiloading);
+  }, [apiloading]);
+
   return (
-    <StoreProvider store={createStore(rootReducer)}>
-      <PaperProvider>
-        <StatusBar style="auto" />
-        {loading ? <Splash nowstate="Loading... TEST(1/1)" /> : <LoginStack />}
-      </PaperProvider>
-    </StoreProvider>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style="auto" />
+      <Spinner
+        visible={apiloading}
+        size="large"
+        animation="fade"
+        color="#DC143C"
+        overlayColor="rgba(0,0,0,0.4)"
+      />
+      {loading ? (
+        <Splash nowstate="Loading... TEST(1/1)" />
+      ) : user ? (
+        <Home />
+      ) : (
+        <LoginStack />
+      )}
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    zIndex: 1,
+    elevation: 1,
   },
 });
 

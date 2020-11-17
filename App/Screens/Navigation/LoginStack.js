@@ -38,6 +38,7 @@ const LoginStack = () => {
               shadowOffset: {
                 height: 0,
               },
+              elevation: 0,
             },
           }}
         />

@@ -8,16 +8,28 @@ import {
   Alert,
   TouchableWithoutFeedback,
   Text,
+  SafeAreaView,
 } from "react-native";
 import { Checkbox, TouchableRipple } from "react-native-paper";
+import { useSelector, useDispatch } from "react-redux";
+import Actions from "../../Redux/Actions";
 
 const Login = ({ navigation }) => {
   const [studentID, onChangeID] = React.useState("");
   const [studentPW, onChangePW] = React.useState("");
   const [checked, setChecked] = React.useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.Auth);
+
+  React.useEffect(() => {
+    // dispatch(Actions.APIAction.API_CALL());
+    // setTimeout(() => {
+    //   dispatch(Actions.APIAction.API_END());
+    // }, 3000);
+  }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image style={styles.logo} source={require("../../Assets/sejong1.png")} />
       <TextInput
         style={styles.input}
@@ -46,7 +58,19 @@ const Login = ({ navigation }) => {
         </View>
       </TouchableWithoutFeedback>
 
-      <TouchableWithoutFeedback onPress={() => console.log("1")}>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          console.log(
+            `학번: ${studentID}/비밀번호: ${studentPW}/자동로그인: ${checked}`
+          );
+          const userInfo = {
+            studentID,
+            studentPW,
+            checked,
+          };
+          dispatch(Actions.AuthAction.LOGIN(userInfo));
+        }}
+      >
         <View style={styles.loginbutton}>
           <Text style={styles.logintext}>로그인</Text>
         </View>
@@ -55,7 +79,7 @@ const Login = ({ navigation }) => {
       <TouchableWithoutFeedback onPress={() => navigation.navigate("FindPW")}>
         <Text style={styles.findpw}>비밀번호찾기</Text>
       </TouchableWithoutFeedback>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -101,6 +125,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 20,
+    overflow: "hidden",
   },
   logintext: {
     fontSize: 17,
