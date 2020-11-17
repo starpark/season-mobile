@@ -2,10 +2,10 @@ import * as React from "react";
 import { View, Text, Button } from "react-native";
 import Actions from "../../Redux/Actions";
 
-const Setting = () => {
+const Community = () => {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Setting</Text>
+      <Text>Community</Text>
 
       <Button
         onPress={() => {
@@ -18,4 +18,4 @@ const Setting = () => {
   );
 };
 
-export default Setting;
+export default Community;
