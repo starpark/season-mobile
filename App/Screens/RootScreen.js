@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import Splash from "./Components/Splash";
 import LoginStack from "./Navigation/LoginStack";
 import { useSelector } from "react-redux";
-import Home from "./Components/Home";
+import BottomTab from "./Navigation/BottomTab";
 import Spinner from "react-native-loading-spinner-overlay";
 
 const RootScreen = () => {
@@ -36,7 +36,7 @@ const RootScreen = () => {
       {loading ? (
         <Splash nowstate="Loading... TEST(1/1)" />
       ) : user ? (
-        <Home />
+        <BottomTab />
       ) : (
         <LoginStack />
       )}
