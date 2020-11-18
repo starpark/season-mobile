@@ -34,14 +34,14 @@ const Login = ({ navigation }) => {
         style={styles.input}
         onChangeText={(text) => onChangeID(text)}
         value={studentID}
-        placeholder="학번"
+        placeholder="학번/아이디(ID)"
       />
       <TextInput
         style={styles.input}
         onChangeText={(text) => onChangePW(text)}
         value={studentPW}
         secureTextEntry={true}
-        placeholder="비밀번호"
+        placeholder="비밀번호(Password)"
       />
       <TouchableWithoutFeedback
         onPress={() => {
