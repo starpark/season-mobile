@@ -2,12 +2,12 @@ import * as React from "react";
 import { View, Text, Button } from "react-native";
 import Actions from "../../Redux/Actions";
 import { useDispatch } from "react-redux";
-import styles from "./styles";
+import Global from "../Styles/GlobalStyles";
 
 const Calendar = () => {
   const dispatch = useDispatch();
   return (
-    <View style={styles.container}>
+    <View style={Global.Styles.container}>
       <Text>Calendar</Text>
 
       <Button

@@ -1,11 +1,11 @@
 import * as React from "react";
 import { View, Text, Button } from "react-native";
 import Actions from "../../Redux/Actions";
-import styles from "./styles";
+import Global from "../Styles/GlobalStyles";
 
 const Setting = () => {
   return (
-    <View style={styles.container}>
+    <View style={Global.Styles.container}>
       <Text>Setting</Text>
       <View
         style={{

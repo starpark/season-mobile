@@ -1,14 +1,14 @@
 import * as React from "react";
 import { SafeAreaView, View, StyleSheet } from "react-native";
-import TaskTracker from "./TaskTracker";
-import globalStyle from "./styles";
+import CourseTracker from "./CourseTracker";
+import Global from "../Styles/GlobalStyles";
 
 const Home = () => {
   return (
-    <SafeAreaView style={globalStyle.container}>
+    <SafeAreaView style={Global.Styles.container}>
       <View style={styles.userbox}></View>
       <View style={styles.tasktracker}>
-        <TaskTracker />
+        <CourseTracker />
       </View>
       <View style={styles.mainnotice}></View>
       <View style={styles.subnotice}></View>
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
   },
   tasktracker: {
-    backgroundColor: "gray",
+    backgroundColor: "white",
   },
   mainnotice: {
     flex: 2,
