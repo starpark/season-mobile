@@ -11,7 +11,7 @@ import {
   MaterialIcons,
   Octicons,
 } from "@expo/vector-icons";
-import TabBar from "./TabBar";
+import TabBar from "./BottomTabBar";
 
 const Tab = createBottomTabNavigator();
 

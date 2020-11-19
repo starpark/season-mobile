@@ -44,8 +44,8 @@ const TabBar = ({ state, descriptors, navigation }) => {
             options.tabBarLabel !== undefined
               ? options.tabBarLabel
               : options.title !== undefined
-              ? options.title
-              : route.name;
+                ? options.title
+                : route.name;
 
           const isFocused = state.index === index;
 
@@ -104,8 +104,7 @@ const style = StyleSheet.create({
     shadowOpacity: 0.39,
     shadowRadius: 8.3,
     backgroundColor: "#fbfbfb",
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
+
     elevation: 10,
     position: "absolute",
     bottom: 0,

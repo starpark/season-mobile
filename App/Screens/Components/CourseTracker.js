@@ -1,23 +1,21 @@
 import * as React from "react";
 import {
-  SafeAreaView,
+  TouchableOpacity,
   View,
   Text,
   Dimensions,
   StyleSheet,
-  TouchableOpacity,
-  Platform,
-  ImageBackground
 } from "react-native";
 import Carousel, {
   Pagination,
-  ParallaxImage,
 } from "react-native-snap-carousel";
 import Global from "../Styles/GlobalStyles"
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { AntDesign } from '@expo/vector-icons';
+import { SlackTabView } from "../Navigation/LectureTopTab"
+import { CommonActions, useNavigation } from '@react-navigation/native';
+import { Modalize } from 'react-native-modalize';
+import { Entypo } from '@expo/vector-icons';
 
-const { width: screenWidth } = Dimensions.get("window");
 
 const ENTRIES1 = [
   {
@@ -42,7 +40,7 @@ const ENTRIES1 = [
     }
   },
   {
-    title: "알고리즘및실습 (001)",
+    title: "알고리즘및실습 (002)",
     instructor: "국형준, 코스담당자A",
     score: {
       max: 244,
@@ -63,7 +61,7 @@ const ENTRIES1 = [
     }
   },
   {
-    title: "알고리즘및실습 (001)",
+    title: "알고리즘및실습 (003)",
     instructor: "국형준, 코스담당자A",
     score: {
       max: 244,
@@ -84,7 +82,7 @@ const ENTRIES1 = [
     }
   },
   {
-    title: "알고리즘및실습 (001)",
+    title: "알고리즘및실습 (004)",
     instructor: "국형준, 코스담당자A",
     score: {
       max: 244,
@@ -105,7 +103,7 @@ const ENTRIES1 = [
     }
   },
   {
-    title: "알고리즘및실습 (001)",
+    title: "알고리즘및실습 (005)",
     instructor: "국형준, 코스담당자A",
     score: {
       max: 244,
@@ -127,15 +125,29 @@ const ENTRIES1 = [
   },
 ];
 
-const LectureCarousel = () => {
+const { width: screenWidth } = Dimensions.get("window");
+const { height: screenHeight } = Dimensions.get("window");
+
+const MENU_HEIGHT = screenHeight - 200;
+
+const CourseTracker = () => {
   const [entries, setEntries] = React.useState([]);
   const [activeSlide, setActiveSlide] = React.useState(0);
+  const modalizeRef = React.useRef(null);
+  const navigation = useNavigation();
   const carouselRef = React.useRef(null);
 
   React.useEffect(() => {
     setEntries(ENTRIES1);
     setActiveSlide(0);
   }, []);
+
+  const onOpen = () => {
+    modalizeRef.current?.open();
+  };
+  const onClose = () => {
+    modalizeRef.current?.close();
+  };
 
   const tintColorSet = (max, now) => {
     const score = now / max;
@@ -153,162 +165,174 @@ const LectureCarousel = () => {
     }
   }
 
-
-  const renderItem = ({ item, index }, parallaxProps) => {
+  const renderItem = ({ item, index }) => {
     return (
       <View style={styles.item}>
-        <View style={styles.titleContainer}>
-          <View style={styles.titleBox}></View>
-          <View>
-            <Text style={styles.itemtitle}>{item.title}</Text>
-            <Text>{item.instructor}</Text>
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <View style={{ flex: 1, backgroundColor: Global.Colors.course[index] }}></View>
+          <View style={{ flex: 1 }} ></View>
+          <View style={styles.taskContainer} >
+            <View>
+              <Text style={styles.itemtitle}>{item.title}</Text>
+              <Text >{item.instructor}</Text>
+            </View>
+            <View>
+            </View>
+            <View style={styles.circleContainer}>
+              <View>
+                <Text style={styles.circleTitle}>학습 시간</Text>
+                <Text style={styles.circleLearn}>{item.learningTime} 분</Text>
+              </View>
+              <View>
+                <Text style={styles.circleTitle}>점수</Text>
+                <AnimatedCircularProgress
+                  size={80}
+                  width={5}
+                  fill={item.score.now / item.score.max * 100}
+                  duration={index ? (0) : (1000)}
+                  tintColor={tintColorSet(item.score.max, item.score.now)}
+                  backgroundColor={Global.Colors.gray} >
+                  {
+                    (fill) => (
+                      <>
+                        <Text style={styles.circleContents}>
+                          {item.score.now}
+                        </Text>
+                        <Text style={styles.circleSubContents}>
+                          /{item.score.max}
+                        </Text>
+                      </>
+                    )
+                  }
+                </AnimatedCircularProgress>
+              </View>
+              <View>
+                <Text style={styles.circleTitle}>출석</Text>
+                <AnimatedCircularProgress
+                  size={80}
+                  width={5}
+                  fill={item.attendance.now / item.attendance.max * 100}
+                  duration={index ? (0) : (1000)}
+                  tintColor={tintColorSet(item.attendance.max, item.attendance.now)}
+                  backgroundColor={Global.Colors.gray} >
+                  {
+                    (fill) => (
+                      <>
+                        <Text style={styles.circleContents}>
+                          {item.attendance.now}
+                        </Text>
+                        <Text style={styles.circleSubContents}>
+                          /{item.attendance.max}
+                        </Text>
+                      </>
+                    )
+                  }
+                </AnimatedCircularProgress>
+              </View>
+            </View>
+            <TouchableOpacity style={styles.plusBox} activeOpacity={0.9} onPress={onOpen}>
+              <Entypo name="plus" size={27} color="white" />
+            </TouchableOpacity>
           </View>
-        </View>
-        <View style={styles.circleContainer}>
-          <View>
-            <Text style={styles.circleTitle}>학습 시간</Text>
-            <Text style={styles.circleLearn}>{item.learningTime} 분</Text>
-          </View>
-          <View>
-            <Text style={styles.circleTitle}>점수</Text>
-            <AnimatedCircularProgress
-              size={80}
-              width={5}
-              fill={item.score.now / item.score.max * 100}
-              duration={1000}
-              tintColor={tintColorSet(item.score.max, item.score.now)}
-              backgroundColor={Global.Colors.gray} >
-              {
-                (fill) => (
-                  <>
-                    <Text style={styles.circleContents}>
-                      {item.score.now}
-                    </Text>
-                    <Text style={styles.circleSubContents}>
-                      /{item.score.max}
-                    </Text>
-                  </>
-                )
-              }
-            </AnimatedCircularProgress>
-          </View>
-          <View>
-            <Text style={styles.circleTitle}>출석</Text>
-            <AnimatedCircularProgress
-              size={80}
-              width={5}
-              fill={item.attendance.now / item.attendance.max * 100}
-              duration={1000}
-              tintColor={tintColorSet(item.attendance.max, item.attendance.now)}
-              backgroundColor={Global.Colors.gray} >
-              {
-                (fill) => (
-                  <>
-                    <Text style={styles.circleContents}>
-                      {item.attendance.now}
-                    </Text>
-                    <Text style={styles.circleSubContents}>
-                      /{item.attendance.max}
-                    </Text>
-                  </>
-                )
-              }
-            </AnimatedCircularProgress>
-          </View>
-        </View>
-        <View style={styles.contentsContainer}>
-          <View style={styles.content}>
-            <Text style={styles.contentTitle}>공지사항</Text>
-            <Text numberOfLines={1}>{item.notice[0]}</Text>
-            <Text numberOfLines={1}>{item.notice[1]}</Text>
-          </View>
-          <View style={styles.content}>
-            <Text style={styles.contentTitle}>강의</Text>
-            <Text numberOfLines={1}>{item.lecture[0]}</Text>
-            <Text numberOfLines={1}>{item.lecture[1]}</Text>
-          </View>
-        </View>
-        <View style={styles.plusBox}>
-          <AntDesign name="arrowright" size={24} color="white" />
         </View>
       </View>
     );
   };
-
   return (
-    <View style={styles.container}>
-      <Carousel
-        ref={carouselRef}
-        sliderWidth={screenWidth}
-        sliderHeight={200}
-        itemWidth={screenWidth - 60}
-        data={entries}
-        renderItem={renderItem}
-        hasParallaxImages={true}
-        onSnapToItem={(index) => {
-          setActiveSlide(index);
-        }}
-      />
-      <Pagination
-        dotsLength={ENTRIES1.length}
-        activeDotIndex={activeSlide}
-        containerStyle={{}}
-        dotStyle={{
-          width: 15,
-          height: 15,
-          borderRadius: 10,
-          marginHorizontal: 5,
-          backgroundColor: "rgba(0, 0, 0, 0.92)",
-        }}
-        tappableDots={true}
-        carouselRef={carouselRef}
-        inactiveDotOpacity={0.4}
-        inactiveDotScale={0.6}
-      />
+    <View
+      style={styles.container}
+      pagingEnabled
+    >
+      <View style={{ height: 300 }}>
+        <Carousel
+          ref={carouselRef}
+          sliderWidth={screenWidth}
+          itemWidth={screenWidth}
+          data={entries}
+          renderItem={renderItem}
+          onSnapToItem={(index) => {
+            setActiveSlide(index);
+
+            // navigation.dispatch(
+            //   CommonActions.navigate({
+            //     name: 'Weekly',
+            //   })
+            // );
+          }}
+        />
+        <Pagination
+          dotsLength={entries.length}
+          activeDotIndex={activeSlide}
+          containerStyle={{
+            marginTop: -10,
+          }}
+          dotStyle={{
+            width: 15,
+            height: 15,
+            borderRadius: 10,
+            marginHorizontal: 5,
+            backgroundColor: "rgba(0, 0, 0, 0.92)",
+          }}
+          tappableDots={true}
+          carouselRef={carouselRef}
+          inactiveDotOpacity={0.4}
+          inactiveDotScale={0.6}
+        />
+      </View>
+      <View style={styles.contents}>
+        <View style={{ flex: 1 }}>
+          <View style={styles.contentsTitleBox}>
+            <Text style={styles.contentsTitle}>
+              최근 공지사항
+            </Text>
+            <Text style={styles.contentBottomLine}></Text>
+          </View>
+        </View>
+        <View style={{ flex: 1 }}>
+          <View style={styles.contentsTitleBox}>
+            <Text style={styles.contentsTitle}>
+              최근 업로드된 강의
+            </Text>
+            <Text style={styles.contentBottomLine}></Text>
+          </View>
+        </View>
+      </View>
+      <SlackTabView ref={el => (modalizeRef.current = el)} index={activeSlide} entry={entries[activeSlide]} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    flex: 1,
   },
   item: {
+    flex: 1,
+  },
+  taskContainer: {
     width: screenWidth - 60,
-    height: 300,
-    marginVertical: 10,
-    backgroundColor: "white",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 2,
     },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-
-    elevation: 6,
-  },
-  imageContainer: {
-    flex: 1,
-    marginBottom: Platform.select({ ios: 0, android: 1 }), // Prevent a random Android rendering issue
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
     backgroundColor: "white",
-    borderRadius: 10,
-  },
-  image: {
-    ...StyleSheet.absoluteFillObject,
-    resizeMode: "cover",
+    elevation: 5,
+    padding: 10,
+    position: "absolute",
+    alignSelf: "center",
+
   },
   titleContainer: {
-    marginTop: 10,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   titleBox: {
-    width: 5,
-    backgroundColor: Global.Colors.red1,
-    marginRight: 10,
+    flex: 1
   },
   itemtitle: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "bold",
   },
   circleTitle: {
@@ -337,40 +361,45 @@ const styles = StyleSheet.create({
   circleSubContents: {
     color: "gray",
   },
-  contentsContainer: {
+  contents: {
     flex: 1,
-    flexDirection: "row"
+    paddingHorizontal: 20
   },
-  content: {
-    flex: 1,
-    paddingHorizontal: 10
+  contentsTitleBox: {
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
-  contentTitle: {
-    fontSize: 15,
+  contentsTitle: {
+    fontSize: 17,
     fontWeight: "bold",
-    borderBottomWidth: 1,
-    borderBottomColor: Global.Colors.gray2,
-    marginVertical: 2,
+    borderBottomColor: Global.Colors.red1,
+    borderBottomWidth: 3
+  },
+  contentBottomLine: {
+    borderBottomWidth: 3,
+    flex: 1,
+    borderBottomColor: Global.Colors.gray2
   },
   plusBox: {
-    width: 40,
-    height: 40,
-    backgroundColor: Global.Colors.blue,
     position: "absolute",
     top: -5,
     right: -5,
+    height: 40,
+    width: 40,
+    backgroundColor: Global.Colors.blue,
+    alignItems: "center",
+    justifyContent: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 5,
+      height: 2,
     },
-    shadowOpacity: 0.34,
-    shadowRadius: 6.27,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
 
-    elevation: 10,
-    alignItems: "center",
-    justifyContent: "center"
-  }
+    elevation: 5,
+  },
+
 });
 
-export default LectureCarousel;
+export default CourseTracker;
