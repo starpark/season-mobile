@@ -5,7 +5,7 @@ import { Text } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import Action from "../../../Redux/Actions";
 import UserInfo from "./UserInfo";
-import Summury from "./Summury";
+import TaskTracker from "./TaskTracker";
 
 const Home = () => {
   const [entries, setEntries] = React.useState([]);
@@ -35,7 +35,7 @@ const Home = () => {
         </View>
       </View>
       <UserInfo />
-      <Summury entries={entries} />
+      <TaskTracker entries={entries} />
     </SafeAreaView>
   );
 };
