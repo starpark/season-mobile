@@ -1,7 +1,6 @@
 import * as React from "react";
 import {
   StyleSheet,
-  TextInput,
   View,
   Image,
   TouchableWithoutFeedback,
@@ -12,6 +11,7 @@ import {
 import { Checkbox } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import Actions from "../../Redux/Actions";
+import { HelperText, TextInput } from "react-native-paper";
 
 const Login = ({ navigation }) => {
   const [studentID, onChangeID] = React.useState("");
@@ -29,20 +29,29 @@ const Login = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image style={styles.logo} source={require("../../Assets/sejong1.png")} />
+      <Image
+        style={styles.logo}
+        source={require("../../Assets/image/sejong1.png")}
+      />
       <TextInput
         style={styles.input}
         onChangeText={(text) => onChangeID(text)}
         value={studentID}
-        placeholder="학번/아이디(ID)"
+        label="학번/아이디(ID)"
       />
+      <HelperText type="error" visible={false}>
+        Email address is invalid!
+      </HelperText>
       <TextInput
         style={styles.input}
         onChangeText={(text) => onChangePW(text)}
         value={studentPW}
         secureTextEntry={true}
-        placeholder="비밀번호(Password)"
+        label="비밀번호(Password)"
       />
+      <HelperText type="error" visible={true}>
+        Email address is invalid!
+      </HelperText>
       <TouchableWithoutFeedback
         onPress={() => {
           setChecked(!checked);
@@ -110,11 +119,8 @@ const styles = StyleSheet.create({
   },
   input: {
     width: 300,
-    height: 40,
-    backgroundColor: "#efeff1",
-    borderRadius: 20,
-    paddingLeft: 20,
-    marginBottom: 10,
+    height: 50,
+    backgroundColor: "white",
   },
   loginbutton: {
     width: 300,

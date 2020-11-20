@@ -1,12 +1,6 @@
 import * as React from "react";
-import {
-  View,
-  Button,
-  Text,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  TextInput,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { HelperText, TextInput } from "react-native-paper";
 
 const FindPW = ({ navigation }) => {
   const [studentID, onChangeID] = React.useState("");
@@ -17,11 +11,14 @@ const FindPW = ({ navigation }) => {
         style={styles.input}
         onChangeText={(text) => onChangeID(text)}
         value={studentID}
-        placeholder="학번"
+        label="학번"
       />
+      <HelperText type="error" visible={false}>
+        Email address is invalid!
+      </HelperText>
       <TouchableWithoutFeedback onPress={() => console.log("1")}>
-        <View style={styles.loginbutton}>
-          <Text style={styles.logintext}>비밀번호찾기</Text>
+        <View style={styles.findbutton}>
+          <Text style={styles.findtext}>비밀번호찾기</Text>
         </View>
       </TouchableWithoutFeedback>
     </View>
@@ -32,13 +29,10 @@ const styles = StyleSheet.create({
   header: {},
   input: {
     width: 300,
-    height: 40,
-    backgroundColor: "#efeff1",
-    borderRadius: 20,
-    paddingLeft: 20,
-    marginBottom: 50,
+    height: 50,
+    backgroundColor: "white",
   },
-  loginbutton: {
+  findbutton: {
     width: 300,
     height: 40,
     backgroundColor: "#DC143C",
@@ -47,7 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 20,
   },
-  logintext: {
+  findtext: {
     fontSize: 17,
     color: "white",
     fontWeight: "bold",
