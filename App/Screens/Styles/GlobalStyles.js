@@ -2,6 +2,16 @@ import { StyleSheet, Platform } from "react-native";
 
 const Global = {
   Colors: {
+    sjred: "#DC143C",
+    sjgray: "#334d61",
+    sjivory: "#fffde5",
+    sjCgray: "#eeede3",
+    sjWgray1: "#c8bdad",
+    sjWgray2: "#716258",
+    sjLgray: "#7e929f",
+    sjyellow: "#fad771",
+    sjgold: "#926d4d",
+    sjsilver: "#c7c8ca",
     red1: "#DC143C",
     red2: "#D43958",
     red3: "#CC4E67",
@@ -30,18 +40,16 @@ const Global = {
       8: "#222222",
       9: "#b65151",
       10: "#52515d",
-    }
-
+    },
   },
   Styles: StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "white",
-      paddingTop: Platform.OS === "android" ? Expo.Constants.statusBarHeight : 0,
+      paddingTop:
+        Platform.OS === "android" ? Expo.Constants.statusBarHeight : 0,
       paddingBottom: 60,
     },
-  })
-
-}
+  }),
+};
 
 export default Global;

@@ -1,23 +1,19 @@
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import Home from "../Components/Home";
+import Home from "../Components/Home/index";
 import Messenger from "../Components/Messenger";
 import Calendar from "../Components/Calendar";
 import Setting from "../Components/Setting";
 import Community from "../Components/Community";
-import {
-  MaterialCommunityIcons,
-  MaterialIcons,
-  Octicons,
-} from "@expo/vector-icons";
+import { navigationRef } from "./rootNavigation";
 import TabBar from "./BottomTabBar";
 
 const Tab = createBottomTabNavigator();
 
 const BottomTab = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
         <Tab.Screen name="home" component={Home} />
         <Tab.Screen name="message-bulleted" component={Messenger} />
