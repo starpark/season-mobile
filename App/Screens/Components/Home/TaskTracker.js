@@ -17,6 +17,8 @@ import {
   AntDesign,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
+import { useCombinedRefs } from "../../../Utils/use-combined-refs";
+import Animated from "react-native-reanimated";
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 const uri = {
@@ -55,15 +57,22 @@ const ENTRIES1 = [
   },
 ];
 
-const Summuey = (props) => {
+const Summuey = React.forwardRef((props, ref) => {
   const [entries, setEntries] = React.useState([]);
   const [index, setIndex] = React.useState(0);
   const carouselRef = React.useRef(null);
   const [itemScale, setItemScale] = React.useState({ width: 0, height: 0 });
+  const scrollRef = React.useRef(new Animated.Value(0)).current;
+  const conbinedRef = useCombinedRefs(ref, scrollRef);
 
   React.useEffect(() => {
     setEntries(props.entries);
   }, [props]);
+
+  const onScroll = Animated.event(
+    [{ nativeEvent: { contentOffset: { y: scrollRef } } }],
+    { useNativeDrive: true }
+  );
 
   const renderItem = ({ item, index }, parallaxProps) => {
     return (
@@ -161,49 +170,27 @@ const Summuey = (props) => {
   };
 
   return (
-    <ScrollView
+    <Animated.ScrollView
       style={{ flex: 1, width: screenWidth }}
       showsVerticalScrollIndicator={false}
+      onScroll={onScroll}
     >
       <View style={styles.taskTracker}>
         <View style={styles.trackerTitle}>
-          <Headline style={{ fontFamily: "Godo" }}>Task Tracker</Headline>
-          <View style={styles.courseQucik}>
-            <Text style={{ color: Global.Colors.sjgray, fontFamily: "Godo" }}>
-              나의 코스
-            </Text>
-            <MaterialCommunityIcons
-              name="chevron-right"
-              size={24}
-              color={Global.Colors.sjgray}
-            />
-          </View>
+          <Text style={{ fontFamily: "Godo", fontSize: 18 }}>Task Tracker</Text>
+          <Pagination
+            dotsLength={entries.length}
+            activeDotIndex={index}
+            containerStyle={styles.pagContainer}
+            dotStyle={styles.pagDot}
+            inactiveDotStyle={{}}
+            inactiveDotOpacity={0.7}
+            inactiveDotScale={0.7}
+            tappableDots={true}
+            carouselRef={carouselRef}
+          />
         </View>
         <View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              overflow: "hidden",
-            }}
-          >
-            <View>
-              <Text style={styles.nowCourse}>수강중인 강의</Text>
-            </View>
-
-            <Pagination
-              dotsLength={entries.length}
-              activeDotIndex={index}
-              containerStyle={styles.pagContainer}
-              dotStyle={styles.pagDot}
-              inactiveDotStyle={{}}
-              inactiveDotOpacity={0.7}
-              inactiveDotScale={0.7}
-              tappableDots={true}
-              carouselRef={carouselRef}
-            />
-          </View>
-
           <ImageBackground
             source={require("../../../Assets/image/pattern.png")}
             style={{
@@ -300,9 +287,9 @@ const Summuey = (props) => {
           </Text>
         </View>
       </View>
-    </ScrollView>
+    </Animated.ScrollView>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
