@@ -6,7 +6,7 @@ const Splash = (props) => {
     <View style={styles.container}>
       <Image
         style={styles.logo}
-        source={require("../../Assets/image/sejonglogo.jpg")}
+        source={require("../Assets/image/sejonglogo.jpg")}
       />
       <Text style={styles.text}>자기주도창의전공 2분반</Text>
 

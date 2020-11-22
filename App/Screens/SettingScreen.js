@@ -1,12 +1,12 @@
 import * as React from "react";
-import { SafeAreaView, View, Text, Button } from "react-native";
-
+import { View, Text, Button } from "react-native";
+import Actions from "../Redux/Actions";
 import Global from "../Styles/GlobalStyles";
 
-const Community = () => {
+const Setting = () => {
   return (
     <View style={Global.Styles.container}>
-      <Text>CCC</Text>
+      <Text>Setting</Text>
       <View
         style={{
           elevation: 10,
@@ -19,4 +19,4 @@ const Community = () => {
   );
 };
 
-export default Community;
+export default Setting;

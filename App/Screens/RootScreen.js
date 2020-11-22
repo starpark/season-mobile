@@ -1,10 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, SafeAreaView, BackHandler } from "react-native";
-import Splash from "./Components/Splash";
-import LoginStack from "./Navigation/LoginStack";
+import Splash from "./SplashScreen";
+import LoginStack from "../Navigation/LoginStack";
 import { useSelector } from "react-redux";
-import BottomTab from "./Navigation/BottomTab";
+import Root from "../Navigation/BottomTab";
 import Spinner from "react-native-loading-spinner-overlay";
 import NetInfo from "@react-native-community/netinfo";
 import { Snackbar } from "react-native-paper";
@@ -53,6 +53,7 @@ const RootScreen = () => {
         overlayColor="rgba(0,0,0,0.4)"
       />
       <Snackbar
+        style={{ zIndex: 1 }}
         visible={visible}
         onDismiss={onDismissSnackBar}
         action={{
@@ -67,7 +68,7 @@ const RootScreen = () => {
       {loading ? (
         <Splash nowstate={nowState} />
       ) : user ? (
-        <BottomTab />
+        <Root />
       ) : (
         <LoginStack />
       )}

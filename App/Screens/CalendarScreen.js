@@ -88,7 +88,7 @@ function App() {
               transform: [{ translateY: imageTranslateY }],
             },
           ]}
-          source={require(`../../Assets/image/background1.jpg`)}
+          source={require(`../Assets/image/background1.jpg`)}
         />
       </Animated.View>
       <Animated.View

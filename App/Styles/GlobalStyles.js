@@ -21,6 +21,7 @@ const Global = {
     red7: "#F5D7DD",
     gray: "#F0F0F0",
     gray2: "#cfcfcf",
+    gray3: "#afafaf",
     green1: "#A6F6F1",
     green2: "#E8FFFF",
     error: "#f2113e",
@@ -48,6 +49,7 @@ const Global = {
       paddingTop:
         Platform.OS === "android" ? Expo.Constants.statusBarHeight : 0,
       paddingBottom: 60,
+      backgroundColor: "white",
     },
   }),
 };
