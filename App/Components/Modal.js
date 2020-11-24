@@ -241,7 +241,7 @@ export const Modal = forwardRef((_, ref) => {
       <RNWebView
         ref={webViewRef}
         source={{
-          uri: "http://board.sejong.ac.kr/mboardlistmobile.do?bbsConfigFK=335",
+          uri: _.uri,
         }}
         onLoadStart={() => handleLoad("start")}
         onLoadProgress={() => handleLoad("progress")}

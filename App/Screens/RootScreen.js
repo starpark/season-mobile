@@ -4,7 +4,7 @@ import { StyleSheet, SafeAreaView, BackHandler } from "react-native";
 import Splash from "./SplashScreen";
 import LoginStack from "../Navigation/LoginStack";
 import { useSelector } from "react-redux";
-import Root from "../Navigation/BottomTab";
+import Root from "../Navigation/RootStack";
 import Spinner from "react-native-loading-spinner-overlay";
 import NetInfo from "@react-native-community/netinfo";
 import { Snackbar } from "react-native-paper";
@@ -18,7 +18,7 @@ let customFonts = {
 const RootScreen = () => {
   const [loading, setLoading] = useState(true);
   const [nowState, setNowState] = useState("");
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
   const user = useSelector((state) => state.Auth);
   const apiloading = useSelector((state) => state.API);
 

@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   ImageBackground,
+  RefreshControl,
 } from "react-native";
 import Global from "../Styles/GlobalStyles";
 import { Text, TouchableRipple, IconButton } from "react-native-paper";
@@ -20,7 +21,7 @@ import { Modal } from "../Components/Modal";
 
 const { width: screenWidth } = Dimensions.get("window");
 
-const uri = {
+const backgrounds = {
   0: require(`../Assets/image/background1.jpg`),
   1: require(`../Assets/image/background2.jpg`),
   2: require(`../Assets/image/background3.jpg`),
@@ -29,7 +30,9 @@ const uri = {
   5: require(`../Assets/image/background6.jpg`),
 };
 const Home = () => {
+  const [refreshing, setRefreshing] = React.useState(false);
   const [entries, setEntries] = React.useState([]);
+  const [uri, setUri] = React.useState("");
   const navigation = useNavigation();
   const modalRef = React.useRef(null);
 
@@ -42,7 +45,25 @@ const Home = () => {
     return () => {};
   }, []);
 
-  const openModal = () => {
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
+  const openNotice = () => {
+    navigation.navigate("Notice");
+  };
+
+  const openHomePage = () => {
+    setUri("http://m.sejong.ac.kr/index.do");
+    modalRef.current.open();
+  };
+
+  const openSchedule = () => {
+    setUri("http://m.sejong.ac.kr/contents/mobile/cor/scheduleguide.html");
     modalRef.current.open();
   };
 
@@ -198,6 +219,9 @@ const Home = () => {
           decelerationRate={"fast"}
           snapToInterval={370} //your element width
           snapToAlignment={"start"}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
         >
           {entries.map((item, index) => (
             <RenderItem index={index} item={item} key={index} />
@@ -210,7 +234,7 @@ const Home = () => {
       >
         <View style={styless.shortcut_scroll_content}>
           <ImageBackground
-            source={uri[0]}
+            source={backgrounds[0]}
             style={styless.shortcut_scroll_imgbg_view}
             imageStyle={styless.shortcut_scroll_imgbg_img}
             blurRadius={1}
@@ -218,7 +242,7 @@ const Home = () => {
             <TouchableRipple
               borderless={true}
               style={styless.shortcut_scroll_touch_box}
-              onPress={openModal}
+              onPress={openNotice}
             >
               <View style={{ padding: 10 }}>
                 <Text style={styless.shortcut_scroll_touch_title}>
@@ -231,7 +255,7 @@ const Home = () => {
             </TouchableRipple>
           </ImageBackground>
           <ImageBackground
-            source={uri[1]}
+            source={backgrounds[1]}
             style={styless.shortcut_scroll_imgbg_view}
             imageStyle={styless.shortcut_scroll_imgbg_img}
             blurRadius={1}
@@ -239,7 +263,7 @@ const Home = () => {
             <TouchableRipple
               borderless={true}
               style={styless.shortcut_scroll_touch_box}
-              onPress={() => console.log("1")}
+              onPress={openSchedule}
             >
               <View style={{ padding: 10 }}>
                 <Text style={styless.shortcut_scroll_touch_title}>
@@ -254,7 +278,7 @@ const Home = () => {
         </View>
         <View style={styless.shortcut_scroll_content}>
           <ImageBackground
-            source={uri[2]}
+            source={backgrounds[2]}
             style={styless.shortcut_scroll_imgbg_view}
             imageStyle={styless.shortcut_scroll_imgbg_img}
             blurRadius={1}
@@ -275,7 +299,7 @@ const Home = () => {
             </TouchableRipple>
           </ImageBackground>
           <ImageBackground
-            source={uri[3]}
+            source={backgrounds[3]}
             style={styless.shortcut_scroll_imgbg_view}
             imageStyle={styless.shortcut_scroll_imgbg_img}
             blurRadius={1}
@@ -283,20 +307,22 @@ const Home = () => {
             <TouchableRipple
               borderless={true}
               style={styless.shortcut_scroll_touch_box}
-              onPress={() => console.log("1")}
+              onPress={openHomePage}
             >
               <View style={{ padding: 10 }}>
                 <Text style={styless.shortcut_scroll_touch_title}>
-                  세종뉴스
+                  세종대 홈페이지
                 </Text>
-                <Text style={styless.shortcut_scroll_touch_subtitle}>News</Text>
+                <Text style={styless.shortcut_scroll_touch_subtitle}>
+                  Home Page
+                </Text>
               </View>
             </TouchableRipple>
           </ImageBackground>
         </View>
       </ScrollView>
       <Portal>
-        <Modal ref={modalRef} />
+        <Modal ref={modalRef} uri={uri} />
       </Portal>
     </SafeAreaView>
   );
