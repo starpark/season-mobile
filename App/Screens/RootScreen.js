@@ -4,15 +4,15 @@ import { StyleSheet, SafeAreaView, BackHandler } from "react-native";
 import Splash from "./SplashScreen";
 import LoginStack from "../Navigation/LoginStack";
 import { useSelector } from "react-redux";
-import Root from "../Navigation/RootStack";
+import Root from "../Navigation/BottomTab";
 import Spinner from "react-native-loading-spinner-overlay";
 import NetInfo from "@react-native-community/netinfo";
 import { Snackbar } from "react-native-paper";
 import * as Font from "expo-font";
 
 let customFonts = {
-  Godo: require("../Assets/fonts/GodoM.ttf"),
   Nanum: require("../Assets/fonts/NanumPen.ttf"),
+  Square: require("../Assets/fonts/NanumSquare_acB.ttf"),
 };
 
 const RootScreen = () => {
@@ -20,7 +20,7 @@ const RootScreen = () => {
   const [nowState, setNowState] = useState("");
   const [visible, setVisible] = useState(false);
   const user = useSelector((state) => state.Auth);
-  const apiloading = useSelector((state) => state.API);
+  const apiCalled = useSelector((state) => state.Api);
 
   const onDismissSnackBar = () => setVisible(false);
 
@@ -46,7 +46,7 @@ const RootScreen = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
       <Spinner
-        visible={apiloading}
+        visible={apiCalled}
         size="large"
         animation="fade"
         color="#DC143C"
