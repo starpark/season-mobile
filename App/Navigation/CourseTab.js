@@ -1,14 +1,15 @@
 import * as React from "react";
+import { ScrollView } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 const Tab = createMaterialTopTabNavigator();
 
-import CourseNotice from "../Components/CourseNotice";
-import SeasonNotice from "../Components/SeasonNotice";
+import CourseWeekly from "../Components/CourseWeekly";
+import CourseMenu from "../Components/CourseMenu";
 
 import Global from "../Styles/GlobalStyles";
 
-const NoticeTab = () => {
+const CourseTab = () => {
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -19,20 +20,20 @@ const NoticeTab = () => {
     >
       <Tab.Screen
         name="CourseNotice"
-        component={CourseNotice}
+        component={CourseWeekly}
         options={{
-          title: "코스 공지",
+          title: "주간 강의",
         }}
       />
       <Tab.Screen
-        name="SeasonNotice"
-        component={SeasonNotice}
+        name="CourseMenu"
+        component={CourseMenu}
         options={{
-          title: "전체 공지",
+          title: "메뉴",
         }}
       />
     </Tab.Navigator>
   );
 };
 
-export default NoticeTab;
+export default CourseTab;

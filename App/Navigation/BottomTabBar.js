@@ -7,6 +7,7 @@ import {
   Animated,
   StyleSheet,
 } from "react-native";
+import { CommonActions } from "@react-navigation/native";
 
 const TabBar = ({ state, descriptors, navigation }) => {
   const [translateValue] = useState(new Animated.Value(0));
