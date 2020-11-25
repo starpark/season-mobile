@@ -21,16 +21,9 @@ import { Modal } from "../Components/Modal";
 
 const { width: screenWidth } = Dimensions.get("window");
 
-const backgrounds = {
-  0: require(`../Assets/image/background1.jpg`),
-  1: require(`../Assets/image/background2.jpg`),
-  2: require(`../Assets/image/background3.jpg`),
-  3: require(`../Assets/image/background4.jpg`),
-  4: require(`../Assets/image/background5.jpg`),
-  5: require(`../Assets/image/background6.jpg`),
-};
 const Home = () => {
   const [refreshing, setRefreshing] = React.useState(false);
+  const [backgrounds, setBackgrounds] = React.useState({});
   const [entries, setEntries] = React.useState([]);
   const [uri, setUri] = React.useState("");
   const navigation = useNavigation();
@@ -41,7 +34,16 @@ const Home = () => {
   React.useEffect(() => {
     dispatch(Action.APIAction.API_CALL());
     setEntries(require("../Utils/json").ENTRIES1);
+    setBackgrounds({
+      0: require(`../Assets/image/background1.jpg`),
+      1: require(`../Assets/image/background2.jpg`),
+      2: require(`../Assets/image/background3.jpg`),
+      3: require(`../Assets/image/background4.jpg`),
+      4: require(`../Assets/image/background5.jpg`),
+      5: require(`../Assets/image/background6.jpg`),
+    });
     dispatch(Action.APIAction.API_END());
+
     return () => {};
   }, []);
 
@@ -75,9 +77,14 @@ const Home = () => {
           color="white"
           size={30}
           style={styless.item_more}
-          onPress={() => console.log("Pressed")}
+          onPress={() =>
+            navigation.navigate("CourseMores", {
+              coureseID: 1,
+              title: item.title,
+            })
+          }
         />
-        <Text style={{ fontFamily: "Godo" }}>{item.title}</Text>
+        <Text style={{ fontFamily: "Square" }}>{item.title}</Text>
         <Text style={styless.item_instructor}>{item.instructor}</Text>
         <View style={styless.item_box}>
           <View
@@ -351,7 +358,7 @@ const styless = StyleSheet.create({
     elevation: 6,
   },
   item_instructor: {
-    fontFamily: "Godo",
+    fontFamily: "Square",
     fontSize: 12,
     color: Global.Colors.gray3,
   },
@@ -383,12 +390,16 @@ const styless = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 40,
   },
-  item_title: { fontFamily: "Godo", fontSize: 16, marginBottom: 5 },
+  item_title: { fontFamily: "Square", fontSize: 16, marginBottom: 5 },
   item_contents: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  item_tasktracker_title: { fontFamily: "Godo", fontSize: 18, marginBottom: 5 },
+  item_tasktracker_title: {
+    fontFamily: "Square",
+    fontSize: 18,
+    marginBottom: 5,
+  },
   item_tasktracker_box: { flexDirection: "row", marginHorizontal: 10 },
   item_tasktracker_contents_box: { flex: 1, alignItems: "center" },
   item_tasktracker_content: {
@@ -397,12 +408,12 @@ const styless = StyleSheet.create({
     marginBottom: 5,
   },
   item_tasktracker_content_title: {
-    fontFamily: "Godo",
+    fontFamily: "Square",
     fontSize: 14,
     marginLeft: 5,
   },
   item_tasktracker_content_box: { height: 50, justifyContent: "flex-start" },
-  item_tasktracker_content_info: { fontFamily: "Godo", fontSize: 16 },
+  item_tasktracker_content_info: { fontFamily: "Square", fontSize: 16 },
   item_tasktracker_content_sub: {
     alignSelf: "flex-start",
     fontSize: 12,
@@ -447,7 +458,7 @@ const styless = StyleSheet.create({
     borderBottomColor: Global.Colors.sjred,
   },
   course_title_content: {
-    fontFamily: "Godo",
+    fontFamily: "Square",
     fontSize: 25,
   },
   course_title_rest: {
@@ -474,12 +485,12 @@ const styless = StyleSheet.create({
   shortcut_scroll_imgbg_img: { borderRadius: 5 },
   shortcut_scroll_touch_box: { borderRadius: 5, flex: 1 },
   shortcut_scroll_touch_title: {
-    fontFamily: "Godo",
+    fontFamily: "Square",
     fontSize: 17,
     color: "white",
   },
   shortcut_scroll_touch_subtitle: {
-    fontFamily: "Godo",
+    fontFamily: "Square",
     fontSize: 12,
     color: "white",
   },
