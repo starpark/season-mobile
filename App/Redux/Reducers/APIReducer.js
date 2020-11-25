@@ -1,14 +1,14 @@
 import types from "../Actions/types";
 
-const API = (state = false, action) => {
+const Api = (state = false, action) => {
   switch (action.type) {
     case types.API_CALL:
-      return true;
+      return action.payload;
     case types.API_END:
-      return false;
+      return action.payload;
     default:
       return state;
   }
 };
 
-export default API;
+export default Api;
