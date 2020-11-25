@@ -31,19 +31,32 @@ const NoticeMore = (props) => {
     return `${year}-${month}-${day}`;
   };
 
+  const head = `
+                <style type="text/css"> @font-face {font-family: 'Square'; src:url('file:///App/Assets/fonts/NanumSquare_acB.ttf')}</style>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                    body { font-size: 150%; word-wrap: break-word; overflow-wrap: break-word;}
+                </style>
+              `;
+  const body =
+    head +
+    `<p style='font-family:"Square";'>
+      ${params.body}
+    </p>`;
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ marginVertical: 10, marginHorizontal: 30 }}>
         <Text
           onPress={() => navigation.goBack()}
-          style={{ fontFamily: "Godo", color: Global.Colors.gray1 }}
+          style={{ fontFamily: "Square", color: Global.Colors.gray1 }}
         >
           공지사항 &gt;{" "}
           <Text style={{ color: "black" }}>{props.route.params.way}</Text>
         </Text>
         <Text
           style={{
-            fontFamily: "Godo",
+            fontFamily: "Square",
             fontSize: 25,
             marginTop: 20,
             marginBottom: 10,
@@ -77,17 +90,14 @@ const NoticeMore = (props) => {
         source={{
           html: `<html>
                     <head>
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <style>
-                            body { font-size: 150%; word-wrap: break-word; overflow-wrap: break-word; }
-                        </style>
+                      ${head}
                     </head>
                     <body>
-                    ${params.body}
+                      ${body}
                     </body>
                 </html>`,
         }}
-        containerStyle={{}}
+        containerStyle={{ padding: 20 }}
       />
     </View>
   );
