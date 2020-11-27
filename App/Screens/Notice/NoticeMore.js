@@ -8,7 +8,7 @@ import {
   Easing,
 } from "react-native";
 import { WebView } from "react-native-webview";
-import Global from "../Styles/GlobalStyles";
+import Global from "../../Styles/GlobalStyles";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 

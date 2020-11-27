@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Checkbox } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
-import Actions from "../Redux/Actions";
+import Actions from "../../Redux/Actions";
 import { HelperText, TextInput } from "react-native-paper";
 
 const Login = ({ navigation }) => {
@@ -31,7 +31,7 @@ const Login = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <Image
         style={styles.logo}
-        source={require("../Assets/image/sejong1.png")}
+        source={require("../../Assets/image/sejong1.png")}
       />
       <TextInput
         style={styles.input}

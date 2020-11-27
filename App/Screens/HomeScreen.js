@@ -14,7 +14,6 @@ import { useDispatch } from "react-redux";
 import { Foundation, MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 import Action from "../Redux/Actions";
 import { ScrollView } from "react-native-gesture-handler";
-import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 import { useNavigation } from "@react-navigation/native";
 import { Portal } from "react-native-portalize";
 import { Modal } from "../Components/Modal";
@@ -35,10 +34,10 @@ const Home = () => {
     dispatch(Action.APIAction.API_CALL());
     setEntries(require("../Utils/json").ENTRIES1);
     setBackgrounds({
-      0: require(`../Assets/image/background1.jpg`),
-      1: require(`../Assets/image/background2.jpg`),
-      2: require(`../Assets/image/background3.jpg`),
-      3: require(`../Assets/image/background4.jpg`),
+      0: require(`../Assets/image/sejong1.jpg`),
+      1: require(`../Assets/image/sejong2.jpg`),
+      2: require(`../Assets/image/sejong3.jpg`),
+      3: require(`../Assets/image/sejong4.jpg`),
       4: require(`../Assets/image/background5.jpg`),
       5: require(`../Assets/image/background6.jpg`),
     });
@@ -78,9 +77,13 @@ const Home = () => {
           size={30}
           style={styless.item_more}
           onPress={() =>
-            navigation.navigate("CourseMores", {
+            navigation.navigate("CourseMore", {
               coureseID: 1,
               title: item.title,
+              screen: "CourseWeekly",
+              params: {
+                title: item.title,
+              },
             })
           }
         />
@@ -179,6 +182,26 @@ const Home = () => {
                     </Text>
                   </View>
                 </View>
+                <View style={styless.item_tasktracker_contents_box}>
+                  <View style={styless.item_tasktracker_content}>
+                    <MaterialCommunityIcons
+                      name="pencil"
+                      size={24}
+                      color="black"
+                    />
+                    <Text style={styless.item_tasktracker_content_title}>
+                      과제
+                    </Text>
+                  </View>
+                  <View style={styless.item_tasktracker_content_box}>
+                    <Text style={styless.item_tasktracker_content_info}>
+                      {item.attendance.now} 회
+                    </Text>
+                    <Text style={styless.item_tasktracker_content_sub}>
+                      / {item.attendance.max}
+                    </Text>
+                  </View>
+                </View>
               </View>
               <View>
                 <View style={styless.item_tasktracker_due_box}>
@@ -251,7 +274,11 @@ const Home = () => {
               style={styless.shortcut_scroll_touch_box}
               onPress={openNotice}
             >
-              <View style={{ padding: 10 }}>
+              <View
+                style={{
+                  padding: 10,
+                }}
+              >
                 <Text style={styless.shortcut_scroll_touch_title}>
                   공지사항
                 </Text>
@@ -265,7 +292,7 @@ const Home = () => {
             source={backgrounds[1]}
             style={styless.shortcut_scroll_imgbg_view}
             imageStyle={styless.shortcut_scroll_imgbg_img}
-            blurRadius={1}
+            blurRadius={2}
           >
             <TouchableRipple
               borderless={true}
@@ -288,7 +315,7 @@ const Home = () => {
             source={backgrounds[2]}
             style={styless.shortcut_scroll_imgbg_view}
             imageStyle={styless.shortcut_scroll_imgbg_img}
-            blurRadius={1}
+            blurRadius={2}
           >
             <TouchableRipple
               borderless={true}
@@ -309,7 +336,7 @@ const Home = () => {
             source={backgrounds[3]}
             style={styless.shortcut_scroll_imgbg_view}
             imageStyle={styless.shortcut_scroll_imgbg_img}
-            blurRadius={1}
+            blurRadius={2}
           >
             <TouchableRipple
               borderless={true}
@@ -354,7 +381,7 @@ const styless = StyleSheet.create({
     },
     shadowOpacity: 0.27,
     shadowRadius: 4.65,
-    zIndex: 1,
+    zIndex: 3,
     elevation: 6,
   },
   item_instructor: {
@@ -390,7 +417,7 @@ const styless = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 40,
   },
-  item_title: { fontFamily: "Square", fontSize: 16, marginBottom: 5 },
+  item_title: { fontFamily: "Square_EB", fontSize: 16, marginBottom: 5 },
   item_contents: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -483,7 +510,11 @@ const styless = StyleSheet.create({
     borderRadius: 5,
   },
   shortcut_scroll_imgbg_img: { borderRadius: 5 },
-  shortcut_scroll_touch_box: { borderRadius: 5, flex: 1 },
+  shortcut_scroll_touch_box: {
+    borderRadius: 5,
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.4)",
+  },
   shortcut_scroll_touch_title: {
     fontFamily: "Square",
     fontSize: 17,

@@ -1,19 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, SafeAreaView, BackHandler } from "react-native";
+import { Provider, DefaultTheme, configureFonts } from "react-native-paper";
 import Splash from "./SplashScreen";
 import LoginStack from "../Navigation/LoginStack";
 import { useSelector } from "react-redux";
-import Root from "../Navigation/BottomTab";
+import Root from "../Navigation/RootStack";
 import Spinner from "react-native-loading-spinner-overlay";
 import NetInfo from "@react-native-community/netinfo";
 import { Snackbar } from "react-native-paper";
 import * as Font from "expo-font";
-
-let customFonts = {
-  Nanum: require("../Assets/fonts/NanumPen.ttf"),
-  Square: require("../Assets/fonts/NanumSquare_acB.ttf"),
-};
 
 const RootScreen = () => {
   const [loading, setLoading] = useState(true);
@@ -25,7 +21,12 @@ const RootScreen = () => {
   const onDismissSnackBar = () => setVisible(false);
 
   const _loadFontsAsync = async () => {
-    await Font.loadAsync(customFonts);
+    await Font.loadAsync({
+      Nanum: require("../Assets/fonts/NanumPen.ttf"),
+      Square: require("../Assets/fonts/NanumSquare_acB.ttf"),
+      Square_EB: require("../Assets/fonts/NanumSquare_acEB.ttf"),
+      Square_L: require("../Assets/fonts/NanumSquare_acL.ttf"),
+    });
   };
 
   useEffect(() => {
@@ -43,36 +44,38 @@ const RootScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="auto" />
-      <Spinner
-        visible={apiCalled}
-        size="large"
-        animation="fade"
-        color="#DC143C"
-        overlayColor="rgba(0,0,0,0.4)"
-      />
-      <Snackbar
-        style={{ zIndex: 1 }}
-        visible={visible}
-        onDismiss={onDismissSnackBar}
-        action={{
-          label: "종료",
-          onPress: () => {
-            BackHandler.exitApp();
-          },
-        }}
-      >
-        {nowState}
-      </Snackbar>
-      {loading ? (
-        <Splash nowstate={nowState} />
-      ) : user ? (
-        <Root />
-      ) : (
-        <LoginStack />
-      )}
-    </SafeAreaView>
+    <Provider>
+      <SafeAreaView style={styles.container}>
+        <StatusBar style="auto" />
+        <Spinner
+          visible={apiCalled}
+          size="large"
+          animation="fade"
+          color="#DC143C"
+          overlayColor="rgba(0,0,0,0.4)"
+        />
+        <Snackbar
+          style={{ zIndex: 1 }}
+          visible={visible}
+          onDismiss={onDismissSnackBar}
+          action={{
+            label: "종료",
+            onPress: () => {
+              BackHandler.exitApp();
+            },
+          }}
+        >
+          {nowState}
+        </Snackbar>
+        {loading ? (
+          <Splash nowstate={nowState} />
+        ) : user ? (
+          <Root />
+        ) : (
+          <LoginStack />
+        )}
+      </SafeAreaView>
+    </Provider>
   );
 };
 
