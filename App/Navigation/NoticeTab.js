@@ -3,8 +3,8 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 
 const Tab = createMaterialTopTabNavigator();
 
-import CourseNotice from "../Components/CourseNotice";
-import SeasonNotice from "../Components/SeasonNotice";
+import CourseNotice from "../Screens/Notice/CourseNotice";
+import SeasonNotice from "../Screens/Notice/SeasonNotice";
 
 import Global from "../Styles/GlobalStyles";
 

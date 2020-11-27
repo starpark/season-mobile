@@ -4,8 +4,8 @@ import {
   CardStyleInterpolators,
 } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import LoginScreen from "../Screens/LoginScreen";
-import FindPasswordScreen from "../Screens/FindPasswordScreen";
+import LoginScreen from "../Screens/Login/LoginScreen";
+import FindPasswordScreen from "../Screens/Login/FindPasswordScreen";
 
 const Stack = createStackNavigator();
 

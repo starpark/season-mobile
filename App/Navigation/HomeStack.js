@@ -5,8 +5,12 @@ import {
 } from "@react-navigation/stack";
 import HomeScreen from "../Screens/HomeScreen";
 import NoticeTab from "./NoticeTab";
-import NoticeMore from "../Screens/NoticeMore";
-import CourseMore from "../Screens/CourseMore";
+import NoticeMore from "../Screens/Notice/NoticeMore";
+import CourseMore from "../Screens/Course/CourseMore";
+import PDFView from "../Components/PDFReader";
+import AddVideo from "../Screens/Course/Instructor/CourseAddVideo";
+import AddAttachment from "../Screens/Course/Instructor/CourseAddAttachment";
+import AddAssignment from "../Screens/Course/Instructor/CourseAddAssignment";
 import { IconButton } from "react-native-paper";
 
 const Stack = createStackNavigator();
@@ -77,7 +81,7 @@ const HomeStack = () => {
         }}
       />
       <Stack.Screen
-        name="CourseMores"
+        name="CourseMore"
         component={CourseMore}
         options={({ route }) => ({
           title: route.params.title,
@@ -93,6 +97,52 @@ const HomeStack = () => {
             elevation: 0,
           },
           headerTitleStyle: { fontFamily: "Square" },
+        })}
+      />
+      <Stack.Screen
+        name="PDF"
+        component={PDFView}
+        options={({ route }) => ({
+          title: route.params.title,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          headerStyle: {
+            shadowOffset: {
+              width: 0,
+              height: 0,
+            },
+            shadowOpacity: 0,
+            shadowRadius: 0,
+
+            elevation: 0,
+          },
+          headerTitleStyle: { fontFamily: "Square" },
+        })}
+      />
+      <Stack.Screen
+        name="AddAttachment"
+        component={AddAttachment}
+        options={({ route }) => ({
+          title: route.params.title,
+          headerTitleStyle: { fontFamily: "Square", fontSize: 16 },
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        })}
+      />
+      <Stack.Screen
+        name="AddAssignment"
+        component={AddAssignment}
+        options={({ route }) => ({
+          title: route.params.title,
+          headerTitleStyle: { fontFamily: "Square", fontSize: 16 },
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        })}
+      />
+      <Stack.Screen
+        name="AddVideo"
+        component={AddVideo}
+        options={({ route }) => ({
+          title: route.params.title,
+          headerTitleStyle: { fontFamily: "Square", fontSize: 16 },
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
         })}
       />
     </Stack.Navigator>

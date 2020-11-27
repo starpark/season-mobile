@@ -4,8 +4,8 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 
 const Tab = createMaterialTopTabNavigator();
 
-import CourseWeekly from "../Components/CourseWeekly";
-import CourseMenu from "../Components/CourseMenu";
+import CourseWeekly from "../Screens/Course/CourseWeekly";
+import CourseMenu from "../Screens/Course/CourseMenu";
 
 import Global from "../Styles/GlobalStyles";
 
@@ -19,7 +19,7 @@ const CourseTab = () => {
       sceneContainerStyle={{ backgroundColor: "white" }}
     >
       <Tab.Screen
-        name="CourseNotice"
+        name="CourseWeekly"
         component={CourseWeekly}
         options={{
           title: "주간 강의",

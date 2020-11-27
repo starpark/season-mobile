@@ -13,17 +13,15 @@ const Tab = createBottomTabNavigator();
 
 const BottomTab = () => {
   return (
-    <NavigationContainer>
-      <Host>
-        <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
-          <Tab.Screen name="home" component={HomeStack} />
-          <Tab.Screen name="message-bulleted" component={MessengerScreen} />
-          <Tab.Screen name="account-group" component={CommunityScreen} />
-          <Tab.Screen name="calendar" component={CalendarScreen} />
-          <Tab.Screen name="menu" component={SettingScreen} />
-        </Tab.Navigator>
-      </Host>
-    </NavigationContainer>
+    <Host>
+      <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
+        <Tab.Screen name="home" component={HomeStack} />
+        <Tab.Screen name="message-bulleted" component={MessengerScreen} />
+        <Tab.Screen name="account-group" component={CommunityScreen} />
+        <Tab.Screen name="calendar" component={CalendarScreen} />
+        <Tab.Screen name="menu" component={SettingScreen} />
+      </Tab.Navigator>
+    </Host>
   );
 };
 
