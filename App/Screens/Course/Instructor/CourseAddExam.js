@@ -20,7 +20,9 @@ const CourseAddExam = () => {
   const [startDate, setStartDate] = React.useState(new Date());
   const [endDate, setEndDate] = React.useState(new Date());
   const [examTime, setExamTime] = React.useState();
-  const [questions, setQuestions] = React.useState([{ question: "" }]);
+  const [questions, setQuestions] = React.useState([
+    { question: "", point: "" },
+  ]);
   const [mode, setMode] = React.useState("date");
   const [show, setShow] = React.useState(false);
   const navigation = useNavigation();
@@ -91,6 +93,9 @@ const CourseAddExam = () => {
       Alert.alert("", "시작과 종료 날짜는 같을 수 없습니다.");
       return;
     }
+    if (examTime === "") {
+      Alert.alert("", "시험 시간을 입력해주세요.");
+    }
     {
       questions.map((q, index) => {
         if (q.question === "") {
@@ -104,15 +109,20 @@ const CourseAddExam = () => {
     console.log(data);
   };
 
-  const handleChange = (e, index) => {
+  const handleChangeQuestion = (e, index) => {
     let q = [...questions];
     q[index].question = e;
+    setQuestions(q);
+  };
+  const handleChangePoint = (e, index) => {
+    let q = [...questions];
+    q[index].point = e.replace(/[^0-9]/g, "");
     setQuestions(q);
   };
 
   const addQuestion = () => {
     let q = [...questions];
-    q.push({ question: "" });
+    q.push({ question: "", point: "" });
     setQuestions(q);
   };
 
@@ -154,19 +164,33 @@ const CourseAddExam = () => {
               문제
             </Text>
             {questions.map((item, index) => (
-              <TextInput
-                label={`${index + 1}번.`}
-                value={questions[index].question}
-                onChangeText={(text) => {
-                  handleChange(text, index);
-                }}
-                theme={{
-                  colors: { primary: Global.Colors.sjgray },
-                }}
-                style={{ marginVertical: 3 }}
-                multiline={true}
-                key={index}
-              />
+              <View key={index} style={{ flexDirection: "row" }}>
+                <TextInput
+                  label={`${index + 1}번.`}
+                  value={questions[index].question}
+                  onChangeText={(text) => {
+                    handleChangeQuestion(text, index);
+                  }}
+                  theme={{
+                    colors: { primary: Global.Colors.sjgray },
+                  }}
+                  style={{ marginVertical: 3, flex: 1, marginRight: 5 }}
+                  multiline={true}
+                />
+                <TextInput
+                  label={`${index + 1}번 배점`}
+                  value={questions[index].point}
+                  keyboardType="numeric"
+                  onChangeText={(text) => {
+                    handleChangePoint(text, index);
+                  }}
+                  theme={{
+                    colors: { primary: Global.Colors.sjgray },
+                  }}
+                  style={{ marginVertical: 3, width: 100 }}
+                  multiline={true}
+                />
+              </View>
             ))}
           </View>
 
@@ -291,6 +315,15 @@ const CourseAddExam = () => {
             justifyContent: "flex-end",
           }}
         >
+          <View>
+            <Text>총 문제 수 {questions.length}</Text>
+            <Text>
+              총점{" "}
+              {questions.reduce((pre, val) => {
+                return pre + Number(val.point);
+              }, 0)}
+            </Text>
+          </View>
           <Button
             icon="close"
             mode="outlined"
