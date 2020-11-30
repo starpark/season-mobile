@@ -36,7 +36,7 @@ const Community = () => {
     value: 0,
   });
   const [controls, setControls] = React.useState(false);
-  const [learningTime, setLearningTime] = React.useState(999999);
+  const [learningTime, setLearningTime] = React.useState(500000);
   const [
     playbackInstancePosition,
     setPlaybackInstancePosition,
