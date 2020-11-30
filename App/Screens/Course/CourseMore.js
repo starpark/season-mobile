@@ -28,12 +28,18 @@ const CourseMore = () => {
             {
               icon: "note-plus",
               label: "공지사항 작성",
-              onPress: () => console.log("1"),
+              onPress: () =>
+                navigation.navigate("AddNotice", {
+                  title: `${route.params.title} > 공지사항 작성`,
+                }),
             },
             {
               icon: "book-open",
               label: "시험 업로드",
-              onPress: () => console.log("2"),
+              onPress: () =>
+                navigation.navigate("AddExam", {
+                  title: `${route.params.title} > 시험 업로드`,
+                }),
             },
             {
               icon: "video",
