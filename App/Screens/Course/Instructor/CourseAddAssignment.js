@@ -25,6 +25,7 @@ const CourseAddAssignment = () => {
   const [mode, setMode] = React.useState("date");
   const [show, setShow] = React.useState(false);
   const [attachment, setAttatchment] = React.useState([]);
+  const [point, setPoint] = React.useState();
   const navigation = useNavigation();
 
   React.useEffect(() => {
@@ -118,7 +119,15 @@ const CourseAddAssignment = () => {
       return;
     }
 
-    const data = [week, title, description, startDate, endDate, attachment];
+    const data = [
+      week,
+      title,
+      description,
+      startDate,
+      endDate,
+      attachment,
+      point,
+    ];
     console.log(data);
   };
 
@@ -192,6 +201,20 @@ const CourseAddAssignment = () => {
               left={(props) => <List.Icon {...props} icon="file" />}
             />
           )}
+        </View>
+        <View style={{ marginBottom: 10 }}>
+          <TextInput
+            label="배점"
+            value={point}
+            keyboardType="numeric"
+            onChangeText={(point) => setPoint(point.replace(/[^0-9]/g, ""))}
+            theme={{
+              colors: { primary: Global.Colors.sjgray },
+              fonts: { regular: { fontFamily: "Square_L" } },
+            }}
+            style={{ backgroundColor: "white" }}
+            multiline={true}
+          />
         </View>
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1, alignItems: "center", padding: 5 }}>
