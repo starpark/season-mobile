@@ -5,6 +5,7 @@ const types = {
   LOGOUT: "LOGOUT",
   API_CALL: "API_CALL",
   API_END: "API_END",
+  NOW: "NOW",
 };
 
 export default types;
