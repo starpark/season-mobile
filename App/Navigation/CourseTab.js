@@ -16,6 +16,7 @@ const CourseTab = () => {
         indicatorStyle: { backgroundColor: Global.Colors.sjred },
         labelStyle: { fontFamily: "Square" },
       }}
+      initialRouteName={CourseWeekly}
       sceneContainerStyle={{ backgroundColor: "white" }}
     >
       <Tab.Screen

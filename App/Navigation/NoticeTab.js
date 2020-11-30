@@ -3,8 +3,8 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 
 const Tab = createMaterialTopTabNavigator();
 
-import CourseNotice from "../Screens/Notice/CourseNotice";
-import SeasonNotice from "../Screens/Notice/SeasonNotice";
+import CourseAllNotice from "../Screens/Notice/CourseAllNotice";
+import AllNotice from "../Screens/Notice/AllNotice";
 
 import Global from "../Styles/GlobalStyles";
 
@@ -18,15 +18,15 @@ const NoticeTab = () => {
       sceneContainerStyle={{ backgroundColor: "white" }}
     >
       <Tab.Screen
-        name="CourseNotice"
-        component={CourseNotice}
+        name="CourseAllNotice"
+        component={CourseAllNotice}
         options={{
           title: "코스 공지",
         }}
       />
       <Tab.Screen
-        name="SeasonNotice"
-        component={SeasonNotice}
+        name="AllNotice"
+        component={AllNotice}
         options={{
           title: "전체 공지",
         }}
