@@ -23,7 +23,8 @@ const response = [
   },
   {
     title: "공지는 읽으세요 제발",
-    body: "string",
+    body:
+      "<a href='https://qastack.kr/programming/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript'> rr </a>",
     issuer: "string",
     createdAt: "2020-11-24T07:50:45.997Z",
     updatedAt: "date",
