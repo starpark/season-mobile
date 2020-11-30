@@ -51,8 +51,8 @@ const NoticeMore = (props) => {
           onPress={() => navigation.goBack()}
           style={{ fontFamily: "Square", color: Global.Colors.gray1 }}
         >
-          공지사항 &gt;{" "}
-          <Text style={{ color: "black" }}>{props.route.params.way}</Text>
+          {props.route.params.way} &gt;{" "}
+          <Text style={{ color: "black" }}>공지사항</Text>
         </Text>
         <Text
           style={{
