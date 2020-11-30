@@ -1,10 +1,15 @@
 import * as React from "react";
 import { ScrollView, View, Text, Button } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 import { List } from "react-native-paper";
 
-import Global from "../../Styles/GlobalStyles";
-
 const CourseMenu = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const now = useSelector((state) => state.Now);
+  const user = "instructor";
+
   return (
     <ScrollView>
       <List.Section style={{ paddingBottom: 120 }}>
@@ -20,16 +25,14 @@ const CourseMenu = () => {
           titleStyle={{ fontFamily: "Square" }}
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => {
-            console.log("메뉴");
+            navigation.navigate("CourseNotice", { title: now.title });
           }}
         />
         <List.Item
           title="수업계획서"
           titleStyle={{ fontFamily: "Square" }}
           right={() => <List.Icon icon="chevron-right" />}
-          onPress={() => {
-            console.log("메뉴");
-          }}
+          onPress={() => {}}
         />
         <List.Subheader
           style={{
@@ -43,7 +46,7 @@ const CourseMenu = () => {
           titleStyle={{ fontFamily: "Square" }}
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => {
-            console.log("메뉴");
+            navigation.navigate("CourseExamList", { title: now.title });
           }}
         />
         <List.Subheader
@@ -58,7 +61,7 @@ const CourseMenu = () => {
           titleStyle={{ fontFamily: "Square" }}
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => {
-            console.log("메뉴");
+            navigation.navigate("CourseQnA", { title: now.title });
           }}
         />
         <List.Item
@@ -89,7 +92,11 @@ const CourseMenu = () => {
           titleStyle={{ fontFamily: "Square" }}
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => {
-            console.log("메뉴");
+            if (user === "instructor") {
+              navigation.navigate("CourseIScore", { title: now.title });
+            } else {
+              navigation.navigate("CourseSScore", { title: now.title });
+            }
           }}
         />
         <List.Item
@@ -97,7 +104,11 @@ const CourseMenu = () => {
           titleStyle={{ fontFamily: "Square" }}
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => {
-            console.log("메뉴");
+            if (user === "instructor") {
+              navigation.navigate("CourseIAttendance", { title: now.title });
+            } else {
+              navigation.navigate("CourseSAttendance", { title: now.title });
+            }
           }}
         />
       </List.Section>
