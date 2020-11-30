@@ -121,7 +121,7 @@ const CourseWeekly = () => {
           if (type === "attachments") {
             navigation.navigate("PDF", { title: item.title, uri: item.uri });
           } else if (type === "assignments") {
-            console.log("과제");
+            navigation.navigate("SubmitAssignment", { title: item.title });
           } else {
             navigation.navigate("Video", { item, lectures });
           }
