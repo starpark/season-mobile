@@ -7,25 +7,22 @@ import {
   Alert,
   Picker,
 } from "react-native";
-import { TextInput, Button, Paragraph, Subheading } from "react-native-paper";
+import { TextInput, Button } from "react-native-paper";
 import * as DocumentPicker from "expo-document-picker";
-import { Video } from "expo-av";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import Global from "../../../Styles/GlobalStyles";
 
-const { width: screenWidth } = Dimensions.get("window");
-
-const CourseAddVideo = () => {
-  const [week, setWeek] = React.useState("");
+const CourseAddExam = () => {
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [date, setDate] = React.useState("start");
   const [startDate, setStartDate] = React.useState(new Date());
   const [endDate, setEndDate] = React.useState(new Date());
+  const [examTime, setExamTime] = React.useState();
+  const [questions, setQuestions] = React.useState([{ question: "" }]);
   const [mode, setMode] = React.useState("date");
   const [show, setShow] = React.useState(false);
-  const [video, setVideo] = React.useState([]);
   const navigation = useNavigation();
 
   React.useEffect(() => {
@@ -33,19 +30,6 @@ const CourseAddVideo = () => {
     endDate.setSeconds(0);
     startDate.setSeconds(0);
   }, []);
-
-  const pickVideo = async () => {
-    const pickResponse = await DocumentPicker.getDocumentAsync({
-      multiple: false,
-      type: "video/*",
-    });
-
-    if (pickResponse.type === "success") {
-      setVideo(pickResponse);
-    }
-
-    console.log(pickResponse);
-  };
 
   const onChange = (event, selectedDate) => {
     if (event.type === "dismissed") {
@@ -100,20 +84,36 @@ const CourseAddVideo = () => {
 
   const handleSubmit = async () => {
     if (title === "") {
-      Alert.alert("제목을 입력해주세요.");
+      Alert.alert("", "제목을 입력해주세요.");
       return;
     }
     if (startDate === endDate) {
-      Alert.alert("시작과 종료 날짜는 같을 수 없습니다.");
+      Alert.alert("", "시작과 종료 날짜는 같을 수 없습니다.");
       return;
     }
-    if (video.length === 0) {
-      Alert.alert("영상을 선택해 주세요,");
-      return;
+    {
+      questions.map((q, index) => {
+        if (q.question === "") {
+          Alert.alert("", "문제는 공란으로 출제할 수 없습니다.");
+          return;
+        }
+      });
     }
 
-    const data = [week, title, description, startDate, endDate, video];
+    const data = [title, description, startDate, endDate, questions, examTime];
     console.log(data);
+  };
+
+  const handleChange = (e, index) => {
+    let q = [...questions];
+    q[index].question = e;
+    setQuestions(q);
+  };
+
+  const addQuestion = () => {
+    let q = [...questions];
+    q.push({ question: "" });
+    setQuestions(q);
   };
 
   return (
@@ -121,41 +121,17 @@ const CourseAddVideo = () => {
       style={{ flex: 1 }}
       contentContainerStyle={{ paddingBottom: 80 }}
     >
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Picker
-          selectedValue={week}
-          onValueChange={(itemValue, itemIndex) => setWeek(itemValue)}
-          style={{ width: 120 }}
-        >
-          <Picker.Item label="1 주차" value="1" />
-          <Picker.Item label="2 주차" value="2" />
-          <Picker.Item label="3 주차" value="3" />
-          <Picker.Item label="4 주차" value="4" />
-          <Picker.Item label="5 주차" value="5" />
-          <Picker.Item label="6 주차" value="6" />
-          <Picker.Item label="7 주차" value="7" />
-          <Picker.Item label="8 주차" value="8" />
-          <Picker.Item label="9 주차" value="9" />
-          <Picker.Item label="10 주차" value="10" />
-          <Picker.Item label="11 주차" value="11" />
-          <Picker.Item label="12 주차" value="12" />
-          <Picker.Item label="13 주차" value="13" />
-          <Picker.Item label="14 주차" value="14" />
-          <Picker.Item label="15 주차" value="15" />
-          <Picker.Item label="16 주차" value="16" />
-        </Picker>
-        <TextInput
-          label="제목"
-          value={title}
-          onChangeText={(title) => setTitle(title)}
-          multiline={true}
-          theme={{
-            colors: { primary: Global.Colors.sjgray },
-            fonts: { regular: { fontFamily: "Square_L" } },
-          }}
-          style={{ backgroundColor: "white", flex: 1 }}
-        />
-      </View>
+      <TextInput
+        label="제목"
+        value={title}
+        onChangeText={(title) => setTitle(title)}
+        multiline={true}
+        theme={{
+          colors: { primary: Global.Colors.sjgray },
+          fonts: { regular: { fontFamily: "Square_L" } },
+        }}
+        style={{ backgroundColor: "white" }}
+      />
 
       <TextInput
         label="내용"
@@ -165,33 +141,59 @@ const CourseAddVideo = () => {
           colors: { primary: Global.Colors.sjgray },
           fonts: { regular: { fontFamily: "Square_L" } },
         }}
-        style={{ backgroundColor: "white", height: 100 }}
+        style={{ backgroundColor: "white" }}
         multiline={true}
       />
 
       <View style={{ padding: 20 }}>
-        <View style={{ marginBottom: 20 }}>
+        <View style={{ padding: 20 }}>
+          <View style={{ marginBottom: 20 }}>
+            <Text
+              style={{ fontFamily: "Square", fontSize: 20, marginBottom: 10 }}
+            >
+              문제
+            </Text>
+            {questions.map((item, index) => (
+              <TextInput
+                label={`${index + 1}번.`}
+                value={questions[index].question}
+                onChangeText={(text) => {
+                  handleChange(text, index);
+                }}
+                theme={{
+                  colors: { primary: Global.Colors.sjgray },
+                }}
+                style={{ marginVertical: 3 }}
+                multiline={true}
+                key={index}
+              />
+            ))}
+          </View>
+
           <Button
-            icon="video"
+            icon="plus"
             mode="contained"
-            onPress={pickVideo}
+            onPress={addQuestion}
             theme={{ colors: { primary: Global.Colors.sjgray } }}
           >
-            영상 선택
+            문제 추가
           </Button>
-          {video.uri && (
-            <View>
-              <Subheading style={{ fontFamily: "Square" }}>
-                {video.name}
-              </Subheading>
-              <Video
-                style={{ width: screenWidth - 40, aspectRatio: 16 / 9 }}
-                source={{ uri: video.uri }}
-                shouldPlay={false}
-                resizeMode="contain"
-              />
-            </View>
-          )}
+        </View>
+        <View style={{ marginBottom: 10 }}>
+          <TextInput
+            label="시험 시간(분)"
+            value={examTime}
+            keyboardType="numeric"
+            onChangeText={(examTime) =>
+              setExamTime(examTime.replace(/[^0-9]/g, ""))
+            }
+            theme={{
+              colors: { primary: Global.Colors.sjgray },
+              fonts: { regular: { fontFamily: "Square_L" } },
+            }}
+            style={{ backgroundColor: "white" }}
+            multiline={true}
+          />
         </View>
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1, alignItems: "center", padding: 5 }}>
@@ -281,6 +283,7 @@ const CourseAddVideo = () => {
             </View>
           </View>
         </View>
+
         <View
           style={{
             flexDirection: "row",
@@ -321,4 +324,4 @@ const CourseAddVideo = () => {
   );
 };
 
-export default CourseAddVideo;
+export default CourseAddExam;
