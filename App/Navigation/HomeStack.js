@@ -11,6 +11,8 @@ import PDFView from "../Components/PDFReader";
 import AddVideo from "../Screens/Course/Instructor/CourseAddVideo";
 import AddAttachment from "../Screens/Course/Instructor/CourseAddAttachment";
 import AddAssignment from "../Screens/Course/Instructor/CourseAddAssignment";
+import AddNotice from "../Screens/Course/Instructor/CourseAddNotice";
+import AddExam from "../Screens/Course/Instructor/CourseAddExam";
 import { IconButton } from "react-native-paper";
 
 const Stack = createStackNavigator();
@@ -139,6 +141,24 @@ const HomeStack = () => {
       <Stack.Screen
         name="AddVideo"
         component={AddVideo}
+        options={({ route }) => ({
+          title: route.params.title,
+          headerTitleStyle: { fontFamily: "Square", fontSize: 16 },
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        })}
+      />
+      <Stack.Screen
+        name="AddNotice"
+        component={AddNotice}
+        options={({ route }) => ({
+          title: route.params.title,
+          headerTitleStyle: { fontFamily: "Square", fontSize: 16 },
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        })}
+      />
+      <Stack.Screen
+        name="AddExam"
+        component={AddExam}
         options={({ route }) => ({
           title: route.params.title,
           headerTitleStyle: { fontFamily: "Square", fontSize: 16 },
