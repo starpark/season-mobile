@@ -8,7 +8,6 @@ import {
   SafeAreaView,
   Platform,
 } from "react-native";
-import { Checkbox } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import Actions from "../../Redux/Actions";
 import { HelperText, TextInput } from "react-native-paper";
@@ -16,7 +15,6 @@ import { HelperText, TextInput } from "react-native-paper";
 const Login = ({ navigation }) => {
   const [studentID, onChangeID] = React.useState("");
   const [studentPW, onChangePW] = React.useState("");
-  const [checked, setChecked] = React.useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.Auth);
 
@@ -52,29 +50,13 @@ const Login = ({ navigation }) => {
       <HelperText type="error" visible={true}>
         Email address is invalid!
       </HelperText>
-      <TouchableWithoutFeedback
-        onPress={() => {
-          setChecked(!checked);
-        }}
-      >
-        <View style={styles.autocheck}>
-          <Checkbox
-            status={checked ? "checked" : "unchecked"}
-            color="#DC143C"
-          />
-          <Text style={styles.autotext}>자동로그인</Text>
-        </View>
-      </TouchableWithoutFeedback>
 
       <TouchableWithoutFeedback
         onPress={() => {
-          console.log(
-            `학번: ${studentID}/비밀번호: ${studentPW}/자동로그인: ${checked}`
-          );
+          console.log(`학번: ${studentID}/비밀번호: ${studentPW}`);
           const userInfo = {
             studentID,
             studentPW,
-            checked,
           };
           dispatch(Actions.AuthAction.LOGIN(userInfo));
         }}
