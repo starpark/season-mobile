@@ -68,6 +68,11 @@ const Home = () => {
     modalRef.current.open();
   };
 
+  const openUis = () => {
+    setUri("https://uis.sejong.ac.kr/");
+    modalRef.current.open();
+  };
+
   const RenderItem = ({ item, index }) => {
     return (
       <View style={styless.item}>
@@ -76,16 +81,18 @@ const Home = () => {
           color="white"
           size={30}
           style={styless.item_more}
-          onPress={() =>
+          onPress={() => {
+            dispatch(Action.NowAction.NOW(item));
             navigation.navigate("CourseMore", {
               coureseID: 1,
               title: item.title,
               screen: "CourseWeekly",
               params: {
                 title: item.title,
+                screen: "CourseMenu",
               },
-            })
-          }
+            });
+          }}
         />
         <Text style={{ fontFamily: "Square" }}>{item.title}</Text>
         <Text style={styless.item_instructor}>{item.instructor}</Text>
@@ -131,7 +138,6 @@ const Home = () => {
             </View>
 
             <View style={{ flex: 1 }}>
-              <Text style={styless.item_tasktracker_title}>Task Tracker</Text>
               <View style={styless.item_tasktracker_box}>
                 <View style={styless.item_tasktracker_contents_box}>
                   <View style={styless.item_tasktracker_content}>
@@ -320,14 +326,14 @@ const Home = () => {
             <TouchableRipple
               borderless={true}
               style={styless.shortcut_scroll_touch_box}
-              onPress={() => console.log("1")}
+              onPress={openUis}
             >
               <View style={{ padding: 10 }}>
                 <Text style={styless.shortcut_scroll_touch_title}>
-                  성적조회
+                  학사정보시스템
                 </Text>
                 <Text style={styless.shortcut_scroll_touch_subtitle}>
-                  Academic Calendar
+                  UIS Sejong
                 </Text>
               </View>
             </TouchableRipple>
@@ -391,7 +397,7 @@ const styless = StyleSheet.create({
   },
   item_box: {
     flexDirection: "row",
-    height: 330,
+    height: 300,
     width: 350,
     marginTop: 10,
     backgroundColor: "white",
