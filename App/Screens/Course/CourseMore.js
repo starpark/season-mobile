@@ -2,13 +2,14 @@ import * as React from "react";
 import { View } from "react-native";
 import { FAB } from "react-native-paper";
 import CourseTab from "../../Navigation/CourseTab";
-import { useRoute, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 import Global from "../../Styles/GlobalStyles";
 
 const CourseMore = () => {
   const [state, setState] = React.useState({ open: false });
 
-  const route = useRoute();
+  const now = useSelector((state) => state.Now);
   const navigation = useNavigation();
 
   const onStateChange = ({ open }) => setState({ open });
@@ -30,7 +31,7 @@ const CourseMore = () => {
               label: "공지사항 작성",
               onPress: () =>
                 navigation.navigate("AddNotice", {
-                  title: `${route.params.title} > 공지사항 작성`,
+                  title: now.title,
                 }),
             },
             {
@@ -38,7 +39,7 @@ const CourseMore = () => {
               label: "시험 업로드",
               onPress: () =>
                 navigation.navigate("AddExam", {
-                  title: `${route.params.title} > 시험 업로드`,
+                  title: now.title,
                 }),
             },
             {
@@ -46,7 +47,7 @@ const CourseMore = () => {
               label: "강의영상 업로드",
               onPress: () =>
                 navigation.navigate("AddVideo", {
-                  title: `${route.params.title} > 강의영상 업로드`,
+                  title: now.title,
                 }),
             },
             {
@@ -54,7 +55,7 @@ const CourseMore = () => {
               label: "과제 업로드",
               onPress: () =>
                 navigation.navigate("AddAssignment", {
-                  title: `${route.params.title} > 과제 업로드`,
+                  title: now.title,
                 }),
             },
             {
@@ -62,7 +63,7 @@ const CourseMore = () => {
               label: "첨부파일 업로드",
               onPress: () =>
                 navigation.navigate("AddAttachment", {
-                  title: `${route.params.title} > 첨부파일 업로드`,
+                  title: now.title,
                 }),
             },
             {
