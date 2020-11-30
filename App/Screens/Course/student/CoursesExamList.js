@@ -2,7 +2,6 @@ import * as React from "react";
 import { ScrollView, View, Text, Dimensions } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import Global from "../../../Styles/GlobalStyles";
-
 const { width: screenWidth } = Dimensions.get("window");
 
 const test = `청춘의 꽃이 그것을 같으며, 인생의 철환하였는가? 눈에 봄바람을 현저하게 힘있다. 가장 오아이스도 가치를 날카로우나 사랑의 바이며, 교향악이다. 자신과 피어나기 두손을 이성은 불어 부패뿐이다. 고행을 그들은 착목한는 시들어 것이다. 그들에게 우리 영락과 같이 생의 것이다. 뛰노는 생의 이것을 있으랴? 밥을 인간이 가슴이 용감하고 싶이 크고 이것이다. 이상은 그들은 그들의 따뜻한 것이다.
