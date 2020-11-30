@@ -1,27 +1,191 @@
 import * as React from "react";
-import { ScrollView, View, Text, Dimensions } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { ScrollView, View, Dimensions, Text } from "react-native";
+import { Button, TextInput, List } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import * as DocumentPicker from "expo-document-picker";
 import Global from "../../../Styles/GlobalStyles";
 
 const { width: screenWidth } = Dimensions.get("window");
 
-const test = `청춘의 꽃이 그것을 같으며, 인생의 철환하였는가? 눈에 봄바람을 현저하게 힘있다. 가장 오아이스도 가치를 날카로우나 사랑의 바이며, 교향악이다. 자신과 피어나기 두손을 이성은 불어 부패뿐이다. 고행을 그들은 착목한는 시들어 것이다. 그들에게 우리 영락과 같이 생의 것이다. 뛰노는 생의 이것을 있으랴? 밥을 인간이 가슴이 용감하고 싶이 크고 이것이다. 이상은 그들은 그들의 따뜻한 것이다.
-
-있으며, 동력은 속에서 인간의 이성은 곳이 안고, 천하를 노년에게서 그리하였는가? 같지 가슴에 열락의 원질이 용기가 쓸쓸하랴? 이상을 불어 가치를 봄날의 사막이다. 보이는 듣기만 할지라도 바로 있으며, 뿐이다. 청춘은 가치를 오아이스도 열락의 힘있다. 창공에 곧 생명을 오직 열락의 부패뿐이다. 있는 무한한 따뜻한 풍부하게 것이다. 위하여, 그와 열락의 부패뿐이다. 예가 천고에 같으며, 있으랴?
-
-이것이야말로 위하여 실로 살았으며, 오직 수 것이다. 그들은 인간이 피부가 불러 모래뿐일 황금시대를 얼음이 열매를 되려니와, 것이다. 실로 꽃이 더운지라 갑 못할 못하다 대중을 보배를 청춘의 봄바람이다. 대한 그들은 풀이 청춘의 미묘한 사람은 있을 관현악이며, 교향악이다. 풍부하게 노래하며 인도하겠다는 천하를 예수는 청춘이 뼈 관현악이며, 웅대한 황금시대다. 수 그들은 가슴이 앞이 살았으며, 위하여서. 부패를 날카로우나 스며들어 가슴이 운다. 과실이 목숨이 풀밭에 기쁘며, 수 피가 간에 얼음이 있는가? 노래하며 속잎나고, 미인을 할지니, 천고에 얼마나 같이, 관현악이며, 구할 뿐이다.
-
-소리다.이것은 열매를 인생에 싹이 그들은 가치를 품었기 우리는 용기가 힘있다. 찾아다녀도, 청춘의 살았으며, 있다. 불러 장식하는 끝까지 이것이야말로 안고, 공자는 이것이다. 따뜻한 있을 무한한 싶이 광야에서 물방아 방지하는 힘차게 이것이다. 위하여, 있는 풀이 간에 맺어, 운다. 미묘한 이상, 바로 가는 우는 기쁘며, 이상의 있으랴? 반짝이는 뜨고, 때에, 황금시대다. 놀이 뛰노는 주며, 것이다. 희망의 청춘의 스며들어 수 별과 힘있다.
-
-있을 끓는 따뜻한 그들의 그들은 거선의 품으며, 희망의 있는가? 우리 방지하는 따뜻한 것이 우는 위하여 못할 꽃이 얼음 때문이다. 그들의 그들의 청춘을 역사를 피가 길을 봄바람이다. 이상을 풍부하게 투명하되 꽃이 것이다. 굳세게 미묘한 것은 싸인 곳으로 힘차게 못할 이상이 것이다. 같은 타오르고 소금이라 황금시대다. 원대하고, 타오르고 되려니와, 온갖 아니다. 눈에 산야에 꽃 긴지라 피어나는 행복스럽고 옷을 사막이다. 피가 피고 무엇을 고행을 불어 되려니와, 내는 얼마나 사는가 그리하였는가? 반짝이는 피는 설레는 우리 얼마나 황금시대다.`;
-
 const CourseSubmitAssignment = () => {
-  const route = useRoute();
-  console.log(route);
+  const [description, setDescription] = React.useState("");
+  const [document, setDocument] = React.useState([]);
+  const navigation = useNavigation();
+
+  const startDate = new Date("2020-11-30T13:16:00.788Z");
+  const endDate = new Date("2021-02-01T13:16:51.000Z");
+
+  const pickDocument = async () => {
+    const pickResponse = await DocumentPicker.getDocumentAsync({
+      type: "*/*",
+    });
+
+    if (pickResponse.type === "success") {
+      setDocument(pickResponse);
+    }
+
+    console.log(pickResponse);
+  };
+
+  const byteToSize = (bytes) => {
+    var sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+    if (bytes == 0) return "0 Byte";
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
+  };
+
+  const handleSubmit = async () => {
+    const data = [description, document];
+    console.log(data);
+  };
+
+  const yyyymmddhhmmss = (date) => {
+    const timeValue = new Date(date);
+
+    let year = timeValue.getFullYear(); //yyyy
+    let month = 1 + timeValue.getMonth(); //mm
+    month = month >= 10 ? month : "0" + month; //month 두자리로 저장
+    let day = timeValue.getDate(); //dd
+    day = day >= 10 ? day : "0" + day;
+    let hour = timeValue.getHours(); //hh
+    hour = hour >= 10 ? hour : "0" + hour;
+    let minutes = timeValue.getMinutes(); //mm
+    minutes = minutes >= 10 ? minutes : "0" + minutes;
+
+    return `${year}년 ${month}월 ${day}일 ${hour}시 ${minutes}분`;
+  };
+
+  const timeForToday = (value) => {
+    const today = new Date();
+    const timeValue = new Date(value);
+
+    const betweenTime = Math.floor(
+      (timeValue.getTime() - today.getTime()) / 1000 / 60
+    );
+
+    if (betweenTime < 0) return "종료";
+
+    const betweenTimeHour = Math.floor(betweenTime / 60);
+    if (betweenTimeHour < 24) {
+      return `D - DAY`;
+    }
+
+    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+    return `D - ${betweenTimeDay}`;
+  };
 
   return (
-    <ScrollView>
-      <View></View>
+    <ScrollView
+      style={{ flex: 1 }}
+      contentContainerStyle={{ paddingBottom: 80 }}
+    >
+      <View style={{ padding: 20 }}>
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: Global.Colors.gray,
+            borderRadius: 20,
+            padding: 20,
+          }}
+        >
+          <View style={{ marginBottom: 10 }}>
+            <Text
+              style={{ fontFamily: "Square", fontSize: 20, marginBottom: 10 }}
+            >
+              교수자 코멘트
+            </Text>
+            <Text>과제는 제출하세요 제발...</Text>
+          </View>
+
+          <View style={{ marginBottom: 10 }}>
+            <Text
+              style={{ fontSize: 19, fontFamily: "Square", marginBottom: 5 }}
+            >
+              시작 날짜
+            </Text>
+            <Text>{yyyymmddhhmmss(startDate)}</Text>
+          </View>
+          <View style={{ marginBottom: 10 }}>
+            <Text
+              style={{
+                fontSize: 19,
+                fontFamily: "Square",
+                marginBottom: 5,
+              }}
+            >
+              종료 날짜
+            </Text>
+            <View style={{ flexWrap: "wrap" }}>
+              <Text
+                style={{
+                  backgroundColor: Global.Colors.red1,
+                  borderRadius: 5,
+                  paddingHorizontal: 3,
+                  color: "white",
+                  marginBottom: 5,
+                }}
+              >
+                {timeForToday(endDate)}
+              </Text>
+            </View>
+
+            <Text>{yyyymmddhhmmss(endDate)}</Text>
+          </View>
+        </View>
+      </View>
+      <TextInput
+        label="내용"
+        value={description}
+        onChangeText={(description) => setDescription(description)}
+        theme={{
+          colors: { primary: Global.Colors.sjgray },
+          fonts: { regular: { fontFamily: "Square_L" } },
+        }}
+        style={{ backgroundColor: "white" }}
+        multiline={true}
+      />
+      <View style={{ padding: 20 }}>
+        <Button
+          icon="attachment"
+          mode="contained"
+          onPress={pickDocument}
+          theme={{ colors: { primary: Global.Colors.sjgray } }}
+        >
+          첨부파일 선택
+        </Button>
+        {document.name && (
+          <List.Item
+            title={document.name}
+            description={byteToSize(document.size)}
+            left={(props) => <List.Icon {...props} icon="file" />}
+          />
+        )}
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          padding: 20,
+          justifyContent: "flex-end",
+        }}
+      >
+        <Button
+          icon="close"
+          mode="outlined"
+          onPress={() => navigation.goBack()}
+          theme={{ colors: { primary: Global.Colors.sjgray } }}
+          style={{ marginHorizontal: 10 }}
+        >
+          취소
+        </Button>
+        <Button
+          icon="note-plus"
+          mode="contained"
+          onPress={handleSubmit}
+          theme={{ colors: { primary: Global.Colors.sjgray } }}
+        >
+          제출
+        </Button>
+      </View>
     </ScrollView>
   );
 };
