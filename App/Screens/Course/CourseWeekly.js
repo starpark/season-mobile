@@ -36,6 +36,7 @@ const CourseWeekly = () => {
     setItem(item);
     setVisible(true);
   };
+
   const hideDialog = () => setVisible(false);
 
   React.useEffect(() => {
@@ -95,12 +96,6 @@ const CourseWeekly = () => {
         )}
         {user === "instructor" && (
           <View>
-            <TouchableRipple
-              style={{ height: 40, justifyContent: "center", paddingLeft: 10 }}
-              onPress={() => console.log(1)}
-            >
-              <Text>수정</Text>
-            </TouchableRipple>
             <TouchableRipple
               style={{ height: 40, justifyContent: "center", paddingLeft: 10 }}
               onPress={() => console.log(1)}
