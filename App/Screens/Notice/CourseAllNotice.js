@@ -162,7 +162,7 @@ const CourseAllNotice = () => {
     return (
       <TouchableRipple
         onPress={() =>
-          navigation.navigate("NoticeMore", { item, way: "코스공지" })
+          navigation.navigate("NoticeDetail", { item, way: "코스공지" })
         }
       >
         <View style={styles.notice_box}>
