@@ -83,7 +83,7 @@ const Home = () => {
           style={styless.item_more}
           onPress={() => {
             dispatch(Action.NowAction.NOW(item));
-            navigation.navigate("CourseMore", {
+            navigation.navigate("CourseDetail", {
               coureseID: 1,
               title: item.title,
               screen: "CourseWeekly",
