@@ -1,6 +1,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { HelperText, TextInput } from "react-native-paper";
+import Global from "../../Styles/GlobalStyles";
 
 const FindPW = ({ navigation }) => {
   const [studentID, onChangeID] = React.useState("");
@@ -11,10 +12,14 @@ const FindPW = ({ navigation }) => {
         style={styles.input}
         onChangeText={(text) => onChangeID(text)}
         value={studentID}
-        label="학번"
+        label="학번/아이디"
+        theme={{
+          colors: { primary: Global.Colors.sjred },
+          fonts: { regular: { fontFamily: "Square_L" } },
+        }}
       />
       <HelperText type="error" visible={false}>
-        Email address is invalid!
+        일치하는 학번/아이디가 없습니다.
       </HelperText>
       <TouchableWithoutFeedback onPress={() => console.log("1")}>
         <View style={styles.findbutton}>
