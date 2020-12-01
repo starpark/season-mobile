@@ -128,7 +128,7 @@ const SeasonNotice = () => {
     }, 2000);
   }, []);
 
-  function timeForToday(value) {
+  const timeForToday = (value) => {
     const today = new Date();
     const timeValue = new Date(value);
 
@@ -157,13 +157,13 @@ const SeasonNotice = () => {
     day = day >= 10 ? day : "0" + day;
 
     return `${year}-${month}-${day}`;
-  }
+  };
 
   const renderItem = ({ item, index }) => {
     return (
       <TouchableRipple
         onPress={() =>
-          navigation.navigate("NoticeMore", { item, way: "전체공지" })
+          navigation.navigate("NoticeDetail", { item, way: "전체공지" })
         }
       >
         <View style={styles.notice_box}>
