@@ -5,10 +5,12 @@ import {
 } from "@react-navigation/stack";
 import HomeScreen from "../Screens/HomeScreen";
 import NoticeTab from "./NoticeTab";
-import NoticeMore from "../Screens/Notice/NoticeMore";
-import CourseMore from "../Screens/Course/CourseMore";
+import NoticeDetail from "../Screens/Notice/NoticeDetail";
+import CourseDetail from "../Screens/Course/CourseDetail";
 import CourseNotice from "../Screens/Course/CourseNotice";
 import CourseExamList from "../Screens/Course/CourseExamList";
+import CourseQnADetail from "../Screens/Course/CourseQnADetail";
+import CourseQnA from "../Screens/Course/CourseQnA";
 import PDFView from "../Components/PDFReader";
 //교수자
 import AddVideo from "../Screens/Course/Instructor/CourseAddVideo";
@@ -16,12 +18,15 @@ import AddAttachment from "../Screens/Course/Instructor/CourseAddAttachment";
 import AddAssignment from "../Screens/Course/Instructor/CourseAddAssignment";
 import AddNotice from "../Screens/Course/Instructor/CourseAddNotice";
 import AddExam from "../Screens/Course/Instructor/CourseAddExam";
-import CourseIScore from "../Screens/Course/Instructor/CourseInstructorScore";
+import CourseIScore from "../Navigation/InstructorTab";
 import CourseIAttendance from "../Screens/Course/Instructor/CourseInstructorAttendance";
+import CourseInstructorGradeAssignment from "../Screens/Course/Instructor/CourseInstructorGradeAssignment";
+import CourseInstructorGradeExam from "../Screens/Course/Instructor/CourseInstructorGradeExam";
+import GradeAssignmentDetail from "../Screens/Course/Instructor/GradeAssignmentDetail";
+import GradeExamDetail from "../Screens/Course/Instructor/GradeExamDetail";
 //학생
 import SubmitAssignment from "../Screens/Course/Student/CourseSubmitAssignment";
 import CourseExam from "../Screens/Course/Student/CourseExam";
-import CourseQnA from "../Screens/Course/CourseQnA";
 import CourseSScore from "../Screens/Course/Student/CourseStudentScore";
 import CourseSAttendance from "../Screens/Course/Student/CourseStudentAttendance";
 
@@ -67,8 +72,8 @@ const HomeStack = () => {
         }}
       />
       <Stack.Screen
-        name="NoticeMore"
-        component={NoticeMore}
+        name="NoticeDetail"
+        component={NoticeDetail}
         options={{
           title: "",
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -95,8 +100,8 @@ const HomeStack = () => {
         }}
       />
       <Stack.Screen
-        name="CourseMore"
-        component={CourseMore}
+        name="CourseDetail"
+        component={CourseDetail}
         options={({ route }) => ({
           title: route.params.title,
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -160,6 +165,35 @@ const HomeStack = () => {
           cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
         })}
       />
+      <Stack.Screen
+        name="CourseQnADetail"
+        component={CourseQnADetail}
+        options={{
+          title: "",
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          headerStyle: {
+            shadowOffset: {
+              width: 0,
+              height: 0,
+            },
+            shadowOpacity: 0,
+            shadowRadius: 0,
+
+            elevation: 0,
+          },
+          gestureDirection: "horizontal",
+          gestureEnabled: true,
+          headerTitleStyle: { fontFamily: "Square" },
+          headerRight: () => (
+            <IconButton
+              icon="dots-vertical"
+              size={24}
+              onPress={() => console.log("Pressed")}
+            />
+          ),
+        }}
+      />
+
       {/* 교수자 */}
       <Stack.Screen
         name="AddAttachment"
@@ -210,8 +244,18 @@ const HomeStack = () => {
         name="CourseIScore"
         component={CourseIScore}
         options={({ route }) => ({
-          title: `${route.params.title} > 점수 관리`,
+          title: `${route.params.title} > 과제/시험 채점`,
           headerTitleStyle: { fontFamily: "Square", fontSize: 16 },
+          headerStyle: {
+            shadowOffset: {
+              width: 0,
+              height: 0,
+            },
+            shadowOpacity: 0,
+            shadowRadius: 0,
+
+            elevation: 0,
+          },
           cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
         })}
       />
@@ -219,8 +263,105 @@ const HomeStack = () => {
         name="CourseIAttendance"
         component={CourseIAttendance}
         options={({ route }) => ({
-          title: `${route.params.title} > 출석 관리`,
-          headerTitleStyle: { fontFamily: "Square", fontSize: 16 },
+          title: `${route.params.title} > 학생 출석/점수`,
+          headerTitleStyle: {
+            fontFamily: "Square",
+            fontSize: 16,
+          },
+          headerStyle: {
+            shadowOffset: {
+              width: 0,
+              height: 0,
+            },
+            shadowOpacity: 0,
+            shadowRadius: 0,
+
+            elevation: 0,
+          },
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        })}
+      />
+      <Stack.Screen
+        name="CourseInstructorGradeExam"
+        component={CourseInstructorGradeExam}
+        options={({ route }) => ({
+          title: `${route.params.title} 채점`,
+          headerTitleStyle: {
+            fontFamily: "Square",
+          },
+          headerStyle: {
+            shadowOffset: {
+              width: 0,
+              height: 0,
+            },
+            shadowOpacity: 0,
+            shadowRadius: 0,
+
+            elevation: 0,
+          },
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        })}
+      />
+      <Stack.Screen
+        name="CourseInstructorGradeAssignment"
+        component={CourseInstructorGradeAssignment}
+        options={({ route }) => ({
+          title: `${route.params.title} 채점`,
+          headerTitleStyle: {
+            fontFamily: "Square",
+          },
+          headerStyle: {
+            shadowOffset: {
+              width: 0,
+              height: 0,
+            },
+            shadowOpacity: 0,
+            shadowRadius: 0,
+
+            elevation: 0,
+          },
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        })}
+      />
+      <Stack.Screen
+        name="GradeAssignmentDetail"
+        component={GradeAssignmentDetail}
+        options={({ route }) => ({
+          title: `과제 채점`,
+          headerTitleStyle: {
+            fontFamily: "Square",
+          },
+          headerStyle: {
+            shadowOffset: {
+              width: 0,
+              height: 0,
+            },
+            shadowOpacity: 0,
+            shadowRadius: 0,
+
+            elevation: 0,
+          },
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        })}
+      />
+      <Stack.Screen
+        name="GradeExamDetail"
+        component={GradeExamDetail}
+        options={({ route }) => ({
+          title: `시험 채점`,
+          headerTitleStyle: {
+            fontFamily: "Square",
+          },
+          headerStyle: {
+            shadowOffset: {
+              width: 0,
+              height: 0,
+            },
+            shadowOpacity: 0,
+            shadowRadius: 0,
+
+            elevation: 0,
+          },
           cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
         })}
       />
@@ -257,7 +398,20 @@ const HomeStack = () => {
         component={CourseSAttendance}
         options={({ route }) => ({
           title: `${route.params.title} > 온라인 출석부`,
-          headerTitleStyle: { fontFamily: "Square", fontSize: 16 },
+          headerTitleStyle: {
+            fontFamily: "Square",
+            fontSize: 16,
+          },
+          headerStyle: {
+            shadowOffset: {
+              width: 0,
+              height: 0,
+            },
+            shadowOpacity: 0,
+            shadowRadius: 0,
+
+            elevation: 0,
+          },
           cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
         })}
       />
