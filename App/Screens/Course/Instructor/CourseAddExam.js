@@ -21,7 +21,7 @@ const CourseAddExam = () => {
   const [endDate, setEndDate] = React.useState(new Date());
   const [examTime, setExamTime] = React.useState();
   const [questions, setQuestions] = React.useState([
-    { question: "", point: "" },
+    { content: "", point: "" },
   ]);
   const [mode, setMode] = React.useState("date");
   const [show, setShow] = React.useState(false);
@@ -98,7 +98,7 @@ const CourseAddExam = () => {
     }
     {
       questions.map((q, index) => {
-        if (q.question === "") {
+        if (q.content === "") {
           Alert.alert("", "문제는 공란으로 출제할 수 없습니다.");
           return;
         }
@@ -111,7 +111,7 @@ const CourseAddExam = () => {
 
   const handleChangeQuestion = (e, index) => {
     let q = [...questions];
-    q[index].question = e;
+    q[index].content = e;
     setQuestions(q);
   };
   const handleChangePoint = (e, index) => {
@@ -122,7 +122,7 @@ const CourseAddExam = () => {
 
   const addQuestion = () => {
     let q = [...questions];
-    q.push({ question: "", point: "" });
+    q.push({ content: "", point: "" });
     setQuestions(q);
   };
 
@@ -167,7 +167,7 @@ const CourseAddExam = () => {
               <View key={index} style={{ flexDirection: "row" }}>
                 <TextInput
                   label={`${index + 1}번.`}
-                  value={questions[index].question}
+                  value={questions[index].content}
                   onChangeText={(text) => {
                     handleChangeQuestion(text, index);
                   }}
