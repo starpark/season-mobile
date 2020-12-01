@@ -46,7 +46,11 @@ const CourseMenu = () => {
           titleStyle={{ fontFamily: "Square" }}
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => {
-            navigation.navigate("CourseExamList", { title: now.title });
+            if (user === "instructor") {
+              navigation.navigate("CourseIScore", { title: now.title });
+            } else {
+              navigation.navigate("CourseExamList", { title: now.title });
+            }
           }}
         />
         <List.Subheader
@@ -88,7 +92,7 @@ const CourseMenu = () => {
           성적
         </List.Subheader>
         <List.Item
-          title="현재점수"
+          title="현재 점수"
           titleStyle={{ fontFamily: "Square" }}
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => {
@@ -111,6 +115,35 @@ const CourseMenu = () => {
             }
           }}
         />
+        {user === "instructor" && (
+          <>
+            <List.Subheader
+              style={{
+                fontFamily: "Square",
+              }}
+            >
+              교수자
+            </List.Subheader>
+            <List.Item
+              title="과제/시험 채점"
+              titleStyle={{ fontFamily: "Square" }}
+              right={() => <List.Icon icon="chevron-right" />}
+              onPress={() => {
+                navigation.navigate("CourseIScore", { title: now.title });
+              }}
+            />
+            <List.Item
+              title="학생 출석/점수"
+              titleStyle={{ fontFamily: "Square" }}
+              right={() => <List.Icon icon="chevron-right" />}
+              onPress={() => {
+                navigation.navigate("CourseIAttendance", {
+                  title: now.title,
+                });
+              }}
+            />
+          </>
+        )}
       </List.Section>
     </ScrollView>
   );
