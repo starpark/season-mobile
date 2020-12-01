@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import HomeStack from "../Navigation/HomeStack";
 import MessengerScreen from "../Screens/MessengerScreen";
 import CalendarScreen from "../Screens/CalendarScreen";
-import SettingScreen from "../Screens/SettingScreen";
+import SettingScreen from "../Screens/Settings/SettingScreen";
 import CommunityScreen from "../Screens/CommunityScreen";
 import TabBar from "./BottomTabBar";
 import { Host } from "react-native-portalize";
