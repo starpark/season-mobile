@@ -11,6 +11,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import Actions from "../../Redux/Actions";
 import { HelperText, TextInput } from "react-native-paper";
+import Global from "../../Styles/GlobalStyles";
 
 const Login = ({ navigation }) => {
   const [studentID, onChangeID] = React.useState("");
@@ -36,19 +37,24 @@ const Login = ({ navigation }) => {
         onChangeText={(text) => onChangeID(text)}
         value={studentID}
         label="학번/아이디(ID)"
+        theme={{
+          colors: { primary: Global.Colors.sjred },
+          fonts: { regular: { fontFamily: "Square_L" } },
+        }}
       />
-      <HelperText type="error" visible={false}>
-        Email address is invalid!
-      </HelperText>
       <TextInput
         style={styles.input}
         onChangeText={(text) => onChangePW(text)}
         value={studentPW}
         secureTextEntry={true}
         label="비밀번호(Password)"
+        theme={{
+          colors: { primary: Global.Colors.sjred },
+          fonts: { regular: { fontFamily: "Square_L" } },
+        }}
       />
       <HelperText type="error" visible={true}>
-        Email address is invalid!
+        학번/아이디 또는 비밀번호가 일치하지 않습니다.
       </HelperText>
 
       <TouchableWithoutFeedback
@@ -103,6 +109,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 50,
     backgroundColor: "white",
+    marginBottom: 30,
   },
   loginbutton: {
     width: 300,
@@ -118,10 +125,12 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: "white",
     fontWeight: "bold",
+    fontFamily: "Square",
   },
   findpw: {
     fontSize: 15,
     color: "gray",
+    fontFamily: "Square",
   },
   autocheck: {
     width: 300,
