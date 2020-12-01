@@ -164,7 +164,7 @@ const CourseNotice = () => {
     return (
       <TouchableRipple
         onPress={() =>
-          navigation.navigate("NoticeMore", { item, way: now.title })
+          navigation.navigate("NoticeDetail", { item, way: now.title })
         }
       >
         <View style={styles.notice_box}>
