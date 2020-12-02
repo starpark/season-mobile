@@ -15,103 +15,28 @@ const { width: screenWidth } = Dimensions.get("window");
 
 const response = [
   {
-    title: "공지는 읽으세요 제발",
-    body: "<span>아령하세여</span>",
-    issuer: "string",
+    title: "공지사항 1",
+    description: "<span>공지사항입니다.</span>",
+    issuer: "안용학",
     createdAt: "2020-11-24T07:50:45.997Z",
     updatedAt: "date",
+    courseTitle: "자기주도창의전공 I (002)",
   },
   {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
+    title: "공지사항 2",
+    description: "공지사항입니다",
+    issuer: "안용학",
     createdAt: "2020-11-24T07:50:45.997Z",
     updatedAt: "date",
+    courseTitle: "자기주도창의전공 II (002)",
   },
   {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
+    title: "공지사항 3",
+    description: "공지사항입니다",
+    issuer: "안용학",
     createdAt: "2020-11-24T07:50:45.997Z",
     updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-24T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-24T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-22T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-22T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title:
-      "공지는 읽으세요 제발공지는 읽으세요 제발공지는 읽으세요 제발공지는 읽으세요 제발공지는 읽으세요 제발공지는 읽으세요 제발공지는 읽으세요 제발공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-10T07:50:45.997Z",
-    updatedAt: "date",
+    courseTitle: "자기주도창의전공 III (002)",
   },
 ];
 
@@ -162,7 +87,7 @@ const CourseAllNotice = () => {
     return (
       <TouchableRipple
         onPress={() =>
-          navigation.navigate("NoticeDetail", { item, way: "코스공지" })
+          navigation.navigate("NoticeDetail", { item, way: item.courseTitle })
         }
       >
         <View style={styles.notice_box}>
@@ -177,6 +102,9 @@ const CourseAllNotice = () => {
               }}
             >
               {item.title}
+            </Text>
+            <Text style={{ color: Global.Colors.sjWgray2 }}>
+              {item.courseTitle}
             </Text>
             <Text style={{ color: Global.Colors.sjWgray2 }}>
               {item.issuer} · {timeForToday(item.createdAt)}
@@ -214,7 +142,7 @@ const styles = StyleSheet.create({
   },
   notice_box: {
     width: screenWidth,
-    height: 60,
+    height: 80,
     paddingVertical: 10,
     paddingHorizontal: 20,
     flexDirection: "row",

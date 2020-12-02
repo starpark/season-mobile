@@ -14,112 +14,23 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 const { width: screenWidth } = Dimensions.get("window");
 
-const response = [
-  {
-    title: "공지는 읽으세요 제발",
-    body: "<span>아령하세여</span>",
-    issuer: "string",
-    createdAt: "2020-11-24T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-24T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-24T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-24T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-24T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-22T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-22T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title:
-      "공지는 읽으세요 제발공지는 읽으세요 제발공지는 읽으세요 제발공지는 읽으세요 제발공지는 읽으세요 제발공지는 읽으세요 제발공지는 읽으세요 제발공지는 읽으세요 제발",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-10T07:50:45.997Z",
-    updatedAt: "date",
-  },
-];
-
 const CourseNotice = () => {
   const [refreshing, setRefreshing] = React.useState(false);
   const navigation = useNavigation();
   const now = useSelector((state) => state.Now);
+
+  console.log(now);
+
+  const response = [
+    {
+      title: "공지사항",
+      description: "<span>공지사항입니다.</span>",
+      issuer: "안용학",
+      createdAt: "2020-11-24T07:50:45.997Z",
+      updatedAt: "date",
+      courseTitle: now.title,
+    },
+  ];
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -181,6 +92,9 @@ const CourseNotice = () => {
               {item.title}
             </Text>
             <Text style={{ color: Global.Colors.sjWgray2 }}>
+              {item.courseTitle}
+            </Text>
+            <Text style={{ color: Global.Colors.sjWgray2 }}>
               {item.issuer} · {timeForToday(item.createdAt)}
             </Text>
           </View>
@@ -217,7 +131,7 @@ const styles = StyleSheet.create({
   },
   notice_box: {
     width: screenWidth,
-    height: 60,
+    height: 80,
     paddingVertical: 10,
     paddingHorizontal: 20,
     flexDirection: "row",
