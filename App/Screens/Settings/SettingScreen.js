@@ -38,7 +38,7 @@ const SettingScreen = () => {
           }}
         >
           <Text style={{ fontFamily: "Square", fontSize: 20 }}>
-            박별 17011589
+            차재윤 17011479
           </Text>
           <Text
             style={{
@@ -47,7 +47,7 @@ const SettingScreen = () => {
               color: Global.Colors.gray3,
             }}
           >
-            소프트웨어융합대학 컴퓨터공학과 2학년
+            소프트웨어융합대학 컴퓨터공학과 3학년
           </Text>
         </View>
       </View>
@@ -100,6 +100,12 @@ const SettingScreen = () => {
         >
           앱
         </List.Subheader>
+        <List.Item
+          title="오픈소스 라이센스"
+          titleStyle={{ fontFamily: "Square" }}
+          right={() => <List.Icon icon="chevron-right" />}
+          onPress={() => {}}
+        />
         <List.Item
           title="버전"
           titleStyle={{ fontFamily: "Square" }}
