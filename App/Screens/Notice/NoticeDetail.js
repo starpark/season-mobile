@@ -10,14 +10,15 @@ import {
 import { WebView } from "react-native-webview";
 import Global from "../../Styles/GlobalStyles";
 import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 const { width: screenWidth } = Dimensions.get("window");
 
 const NoticeMore = (props) => {
   const navigation = useNavigation();
+  const route = useRoute();
 
-  const params = props.route.params.item;
+  const item = route.params.item;
 
   const yyyymmdd = (date) => {
     const timeValue = new Date(date);
@@ -35,13 +36,13 @@ const NoticeMore = (props) => {
                 <style type="text/css"> @font-face {font-family: 'Square'; src:url('file:///App/Assets/fonts/NanumSquare_acB.ttf')}</style>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <style>
-                    body { font-size: 150%; word-wrap: break-word; overflow-wrap: break-word;}
+                    body { font-size: 100%; word-wrap: break-word; overflow-wrap: break-word;}
                 </style>
               `;
   const body =
     head +
     `<p style='font-family:"Square";'>
-      ${params.body}
+      ${item.description}
     </p>`;
 
   return (
@@ -51,7 +52,7 @@ const NoticeMore = (props) => {
           onPress={() => navigation.goBack()}
           style={{ fontFamily: "Square", color: Global.Colors.gray1 }}
         >
-          {props.route.params.way} &gt;{" "}
+          {route.params.way} &gt;{" "}
           <Text style={{ color: "black" }}>공지사항</Text>
         </Text>
         <Text
@@ -62,7 +63,7 @@ const NoticeMore = (props) => {
             marginBottom: 10,
           }}
         >
-          {params.title}
+          {item.title}
         </Text>
         <View>
           <View
@@ -72,7 +73,7 @@ const NoticeMore = (props) => {
               alignItems: "center",
             }}
           >
-            <Text>{params.issuer}</Text>
+            <Text>{item.issuer}</Text>
             <View style={{ flexDirection: "row" }}>
               <AntDesign
                 name="calendar"
@@ -80,7 +81,7 @@ const NoticeMore = (props) => {
                 color="black"
                 style={{ marginRight: 5 }}
               />
-              <Text>{yyyymmdd(params.createdAt)}</Text>
+              <Text>{yyyymmdd(item.createdAt)}</Text>
             </View>
           </View>
         </View>
