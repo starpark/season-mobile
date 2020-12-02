@@ -11,7 +11,6 @@ import CourseNotice from "../Screens/Course/CourseNotice";
 import CourseExamList from "../Screens/Course/CourseExamList";
 import CourseQnADetail from "../Screens/Course/CourseQnADetail";
 import CourseQnA from "../Screens/Course/CourseQnA";
-import PDFView from "../Components/PDFReader";
 //교수자
 import AddVideo from "../Screens/Course/Instructor/CourseAddVideo";
 import AddAttachment from "../Screens/Course/Instructor/CourseAddAttachment";
@@ -105,25 +104,6 @@ const HomeStack = () => {
         options={({ route }) => ({
           title: route.params.title,
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          headerStyle: {
-            shadowOffset: {
-              width: 0,
-              height: 0,
-            },
-            shadowOpacity: 0,
-            shadowRadius: 0,
-
-            elevation: 0,
-          },
-          headerTitleStyle: { fontFamily: "Square" },
-        })}
-      />
-      <Stack.Screen
-        name="PDF"
-        component={PDFView}
-        options={({ route }) => ({
-          title: route.params.title,
-          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
           headerStyle: {
             shadowOffset: {
               width: 0,
