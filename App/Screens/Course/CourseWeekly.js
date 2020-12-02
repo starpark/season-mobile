@@ -326,8 +326,8 @@ const response = [
         _id: "5fc6d9d22fb7d97fee7f3e07",
         class: "5fc6aa7d11dbf95b4c634205",
         number: 1,
-        title: "1-1 번째 강의 올시다~~ ^^",
-        description: "강의 잘보고 계시네요^^..",
+        title: "1-1 번째 강의 입니다.",
+        description: "강의 코멘트 입니다.",
         week: 1,
         comments: [],
         video: {
@@ -347,7 +347,7 @@ const response = [
         _id: "5fc6d9d62fb7d97fee7f3e09",
         class: "5fc6aa7d11dbf95b4c634205",
         number: 2,
-        title: "1-2 번째 강의 올시다~~ ^^",
+        title: "1-2 번째 강의 입니다.",
         week: 1,
         comments: [],
         video: {
@@ -367,7 +367,7 @@ const response = [
         _id: "5fc6d9dd2fb7d97fee7f3e0b",
         class: "5fc6aa7d11dbf95b4c634205",
         number: 3,
-        title: "1-3 번째 강의 올시다~~ ^^",
+        title: "1-3 번째 강의 입니다.",
         week: 1,
         comments: [],
         video: {
@@ -389,7 +389,7 @@ const response = [
         _id: "5fc6d9dd2fb7d97fee7f3e0b",
         class: "5fc6aa7d11dbf95b4c634205",
         number: 3,
-        title: "1-3 번째 강의 올시다~~ ^^",
+        title: "1주차 과제입니다.",
         week: 1,
         comments: [],
         video: {
@@ -415,7 +415,7 @@ const response = [
         _id: "5fc6d9e22fb7d97fee7f3e0d",
         class: "5fc6aa7d11dbf95b4c634205",
         number: 1,
-        title: "2-3 번째 강의 올시다~~ ^^",
+        title: "2-1 번째강의 입니다.",
         week: 2,
         comments: [],
         video: {
@@ -435,7 +435,7 @@ const response = [
         _id: "5fc6d9e72fb7d97fee7f3e0f",
         class: "5fc6aa7d11dbf95b4c634205",
         number: 2,
-        title: "2-2 번째 강의 올시다~~ ^^",
+        title: "2-2 번째 강의 입니다.",
         week: 2,
         comments: [],
         video: {
@@ -455,7 +455,7 @@ const response = [
         _id: "5fc6d9eb2fb7d97fee7f3e11",
         class: "5fc6aa7d11dbf95b4c634205",
         number: 3,
-        title: "2-1 번째 강의 올시다~~ ^^",
+        title: "2-3 번째 강의 입니다.",
         week: 2,
         comments: [],
         video: {
@@ -470,26 +470,6 @@ const response = [
         updatedAt: "2020-12-02T00:03:55.768Z",
         __v: 0,
       },
-      {
-        attachments: [],
-        _id: "5fc6d9ef2fb7d97fee7f3e13",
-        class: "5fc6aa7d11dbf95b4c634205",
-        number: 4,
-        title: "1-1 번째 강의 올시다~~ ^^",
-        week: 2,
-        comments: [],
-        video: {
-          _id: "5fc6d9ef2fb7d97fee7f3e14",
-          key:
-            "/uploads/courses/123456/class/3/week2/lecture4/1606867439042-KakaoTalk_20201202_085849843.mp4",
-          url:
-            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week2/lecture4/1606867439042-KakaoTalk_20201202_085849843.mp4",
-          size: 385932,
-        },
-        createdAt: "2020-12-02T00:03:59.302Z",
-        updatedAt: "2020-12-02T00:03:59.302Z",
-        __v: 0,
-      },
     ],
     assignments: [],
     attachments: [
@@ -498,8 +478,8 @@ const response = [
         class: "5fc6aa7d11dbf95b4c634205",
         number: 1,
         week: 2,
-        title: "첫 번째 과제",
-        description: "개강 후 첫 번째 과제입니다. ",
+        title: "강의자료",
+        description: "강의자료입니다.",
         comments: [],
         attachment: {
           _id: "5fc6da1c2fb7d97fee7f3e16",
