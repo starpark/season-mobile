@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ScrollView, View, Dimensions, Text } from "react-native";
 import { Button, TextInput, List } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import * as DocumentPicker from "expo-document-picker";
 import Global from "../../../Styles/GlobalStyles";
 
@@ -11,6 +11,9 @@ const CourseSubmitAssignment = () => {
   const [description, setDescription] = React.useState("");
   const [document, setDocument] = React.useState([]);
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const { item } = route.params;
 
   const startDate = new Date("2020-11-30T13:16:00.788Z");
   const endDate = new Date("2021-02-01T13:16:51.000Z");
@@ -94,7 +97,7 @@ const CourseSubmitAssignment = () => {
             >
               교수자 코멘트
             </Text>
-            <Text>과제는 제출하세요 제발...</Text>
+            <Text>{}</Text>
           </View>
 
           <View style={{ marginBottom: 10 }}>
