@@ -39,7 +39,7 @@ const Login = ({ navigation }) => {
         label="학번/아이디(ID)"
         theme={{
           colors: { primary: Global.Colors.sjred },
-          fonts: { regular: { fontFamily: "Square_L" } },
+          fonts: { regular: { fontFamily: "Square" } },
         }}
       />
       <TextInput
@@ -50,10 +50,10 @@ const Login = ({ navigation }) => {
         label="비밀번호(Password)"
         theme={{
           colors: { primary: Global.Colors.sjred },
-          fonts: { regular: { fontFamily: "Square_L" } },
+          fonts: { regular: { fontFamily: "Square" } },
         }}
       />
-      <HelperText type="error" visible={true}>
+      <HelperText type="error" visible={false}>
         학번/아이디 또는 비밀번호가 일치하지 않습니다.
       </HelperText>
 
