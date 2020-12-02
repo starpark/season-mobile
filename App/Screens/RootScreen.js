@@ -20,16 +20,17 @@ const RootScreen = () => {
 
   const onDismissSnackBar = () => setVisible(false);
 
-  const _loadFontsAsync = async () => {
-    await Font.loadAsync({
-      Nanum: require("../Assets/fonts/NanumPen.ttf"),
-      Square: require("../Assets/fonts/NanumSquare_acB.ttf"),
-      Square_EB: require("../Assets/fonts/NanumSquare_acEB.ttf"),
-      Square_L: require("../Assets/fonts/NanumSquare_acL.ttf"),
-    });
-  };
-
   useEffect(() => {
+    const _loadFontsAsync = async () => {
+      await Font.loadAsync({
+        Nanum: require("../Assets/fonts/NanumPen.ttf"),
+        Square: require("../Assets/fonts/NanumSquare_acB.ttf"),
+        Square_EB: require("../Assets/fonts/NanumSquare_acEB.ttf"),
+        Square_L: require("../Assets/fonts/NanumSquare_acL.ttf"),
+      });
+      setNowState("");
+    };
+
     setNowState("네트워크 상태 확인중...");
     NetInfo.fetch().then((state) => {
       if (!state) {
@@ -39,7 +40,10 @@ const RootScreen = () => {
     });
     setNowState("폰트 불러오는중...");
     _loadFontsAsync();
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
     return () => {};
   }, []);
 
