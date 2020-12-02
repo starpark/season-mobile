@@ -3,10 +3,11 @@ import {
   SafeAreaView,
   View,
   Text,
-  Dimensions,
+  ScrollView,
   Alert,
   BackHandler,
   TouchableWithoutFeedback,
+  Dimensions,
 } from "react-native";
 import { Video } from "expo-av";
 import { useNetInfo } from "@react-native-community/netinfo";
@@ -23,7 +24,9 @@ import Spinner from "react-native-loading-spinner-overlay";
 let backControlTimeOut = null;
 let controlsTimeOut = null;
 
-const Community = () => {
+const { height: screenHeight } = Dimensions.get("window");
+
+const VideoScreen = () => {
   const VideoRef = React.useRef();
   const doubleTapRefL = React.useRef();
   const doubleTapRefR = React.useRef();
@@ -49,7 +52,7 @@ const Community = () => {
   const { isConnected } = useNetInfo();
   const route = useRoute();
   const navigation = useNavigation();
-  const { item, lectures } = route.params;
+  const { item } = route.params;
 
   let backControl = false;
 
@@ -377,7 +380,7 @@ const Community = () => {
           }}
           resizeMode={Video.RESIZE_MODE_CONTAIN}
           shouldPlay={true}
-          source={{ uri: item.videoUri }}
+          source={{ uri: item.video.url }}
           ref={VideoRef}
           useNativeControls={false}
           onPlaybackStatusUpdate={updatePlayback}
@@ -463,12 +466,7 @@ const Community = () => {
               >
                 {item.title}
               </Text>
-              <IconButton
-                icon="dots-horizontal"
-                size={25}
-                color="white"
-                onPress={() => {}}
-              />
+              <View />
             </View>
             <View
               style={{
@@ -526,10 +524,6 @@ const Community = () => {
                 </>
               )}
             </View>
-
-            {/* <Text style={{ fontFamily: "Square", fontSize: 20 }}>
-          {item.description}
-        </Text> */}
           </Animated.View>
         </TouchableWithoutFeedback>
       )}
@@ -537,4 +531,4 @@ const Community = () => {
   );
 };
 
-export default Community;
+export default VideoScreen;
