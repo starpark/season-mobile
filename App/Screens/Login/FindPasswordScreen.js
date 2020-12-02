@@ -15,7 +15,7 @@ const FindPW = ({ navigation }) => {
         label="학번/아이디"
         theme={{
           colors: { primary: Global.Colors.sjred },
-          fonts: { regular: { fontFamily: "Square_L" } },
+          fonts: { regular: { fontFamily: "Square" } },
         }}
       />
       <HelperText type="error" visible={false}>
