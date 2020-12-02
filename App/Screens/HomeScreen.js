@@ -108,11 +108,11 @@ const Home = () => {
               <Text style={styless.item_title}>최근 공지사항</Text>
               <View>
                 <View style={styless.item_contents}>
-                  <Text numberOfLines={1}>- 공지는 읽으세요... 제발...</Text>
+                  <Text numberOfLines={1}>- {item.notice[0]}</Text>
                   <Text>2020-11-22</Text>
                 </View>
                 <View style={styless.item_contents}>
-                  <Text numberOfLines={1}>- 공지는 읽으세요... 제발...</Text>
+                  <Text numberOfLines={1}>- {item.notice[1]}</Text>
                   <Text>2020-11-22</Text>
                 </View>
               </View>
@@ -122,21 +122,26 @@ const Home = () => {
               <View>
                 <View>
                   <View style={styless.item_contents}>
-                    <Text numberOfLines={1}>
-                      - 강의는 챙겨보세요... 제발...
-                    </Text>
+                    <Text numberOfLines={1}>- {item.lecture[0]}</Text>
                     <Text>2020-11-22</Text>
                   </View>
                   <View style={styless.item_contents}>
-                    <Text numberOfLines={1}>
-                      - 강의는 챙겨보세요... 제발...
-                    </Text>
+                    <Text numberOfLines={1}>- {item.lecture[1]}</Text>
                     <Text>2020-11-22</Text>
                   </View>
                 </View>
               </View>
             </View>
-
+            <View style={{ marginBottom: 10 }}>
+              <View style={styless.item_tasktracker_due_box}>
+                <Text style={styless.item_tasktracker_due_content}>D-7</Text>
+                <Text>{item.due[0].title}</Text>
+              </View>
+              <View style={styless.item_tasktracker_due_box}>
+                <Text style={styless.item_tasktracker_due_content}>D-7</Text>
+                <Text>{item.due[1].title}</Text>
+              </View>
+            </View>
             <View style={{ flex: 1 }}>
               <View style={styless.item_tasktracker_box}>
                 <View style={styless.item_tasktracker_contents_box}>
@@ -207,16 +212,6 @@ const Home = () => {
                       / {item.attendance.max}
                     </Text>
                   </View>
-                </View>
-              </View>
-              <View>
-                <View style={styless.item_tasktracker_due_box}>
-                  <Text style={styless.item_tasktracker_due_content}>D-7</Text>
-                  <Text>과제는 미리하세요 제발...</Text>
-                </View>
-                <View style={styless.item_tasktracker_due_box}>
-                  <Text style={styless.item_tasktracker_due_content}>D-7</Text>
-                  <Text>수업은 미리 들으세요 제발...</Text>
                 </View>
               </View>
             </View>
