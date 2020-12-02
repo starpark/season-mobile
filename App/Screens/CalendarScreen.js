@@ -170,7 +170,7 @@ const CalendarScreen = () => {
                 />
                 <View style={{ padding: 5 }}>
                   <Text style={{ fontFamily: "Square", fontSize: 17 }}>
-                    알고리즘및실습 (001)
+                    자기주도창의전공 I (002)
                   </Text>
                   <Text>과제1</Text>
                 </View>
@@ -200,7 +200,7 @@ const CalendarScreen = () => {
                 />
                 <View style={{ padding: 5 }}>
                   <Text style={{ fontFamily: "Square", fontSize: 17 }}>
-                    알고리즘및실습 (002)
+                    자기주도창의전공 II (002)
                   </Text>
                   <Text>시험1</Text>
                 </View>
@@ -230,7 +230,7 @@ const CalendarScreen = () => {
                 />
                 <View style={{ padding: 5 }}>
                   <Text style={{ fontFamily: "Square", fontSize: 17 }}>
-                    알고리즘및실습 (003)
+                    자기주도창의전공 III (002)
                   </Text>
                   <Text>영상1</Text>
                 </View>
