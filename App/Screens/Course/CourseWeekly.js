@@ -9,6 +9,7 @@ import {
   Menu,
   TouchableRipple,
 } from "react-native-paper";
+import * as WebBrowser from "expo-web-browser";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import Global from "../../Styles/GlobalStyles";
 
@@ -25,7 +26,6 @@ const theme = {
 
 const CourseWeekly = () => {
   const [user, setUser] = React.useState("instructor");
-  const lectures = [];
   const [visible, setVisible] = React.useState(false);
   const [type, setType] = React.useState("");
   const [item, setItem] = React.useState([]);
@@ -39,11 +39,35 @@ const CourseWeekly = () => {
 
   const hideDialog = () => setVisible(false);
 
-  React.useEffect(() => {
-    response.map((item) => {
-      lectures.push({ lectures: item.lectures, week: item.week });
-    });
-  }, []);
+  const byteToSize = (bytes) => {
+    var sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+    if (bytes == 0) return "0 Byte";
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
+  };
+
+  React.useEffect(() => {}, []);
+
+  const yyyymmddhhmmss = (date) => {
+    const timeValue = new Date(date);
+
+    let year = timeValue.getFullYear(); //yyyy
+    let month = 1 + timeValue.getMonth(); //mm
+    month = month >= 10 ? month : "0" + month; //month 두자리로 저장
+    let day = timeValue.getDate(); //dd
+    day = day >= 10 ? day : "0" + day;
+    let hour = timeValue.getHours(); //hh
+    hour = hour >= 10 ? hour : "0" + hour;
+    let minutes = timeValue.getMinutes(); //mm
+    minutes = minutes >= 10 ? minutes : "0" + minutes;
+
+    return `${year}/${month}/${day} ${hour}시 ${minutes}분`;
+  };
+
+  const openWebBrowser = async (url) => {
+    const result = await WebBrowser.openBrowserAsync(url);
+    console.log(result);
+  };
 
   const ItemDialog = ({ item, type, visible }) => (
     <Dialog visible={visible} onDismiss={hideDialog}>
@@ -54,15 +78,27 @@ const CourseWeekly = () => {
       </Dialog.Title>
 
       <Dialog.Content>
-        <Text style={{ fontFamily: "Square", fontSize: 20, paddingBottom: 10 }}>
-          {item.title}
-        </Text>
+        <Text style={{ fontFamily: "Square", fontSize: 18 }}>{item.title}</Text>
+        {item.createdAt && (
+          <Text style={{ color: "gray" }}>
+            {yyyymmddhhmmss(item.createdAt)}
+          </Text>
+        )}
+        {item.attachment && (
+          <Text style={{ color: "gray" }}>
+            파일 용량: {byteToSize(item.attachment.size)}
+          </Text>
+        )}
+        <Text>{item.description}</Text>
 
         {type === "lectures" && (
           <View>
             <TouchableRipple
               style={{ height: 40, justifyContent: "center", paddingLeft: 10 }}
-              onPress={() => console.log(1)}
+              onPress={() => {
+                navigation.navigate("Video", { item });
+                hideDialog();
+              }}
             >
               <Text>보기</Text>
             </TouchableRipple>
@@ -72,7 +108,10 @@ const CourseWeekly = () => {
           <View>
             <TouchableRipple
               style={{ height: 40, justifyContent: "center", paddingLeft: 10 }}
-              onPress={() => console.log(1)}
+              onPress={() => {
+                navigation.navigate("SubmitAssignment", { item });
+                hideDialog();
+              }}
             >
               <Text>제출하기</Text>
             </TouchableRipple>
@@ -83,10 +122,7 @@ const CourseWeekly = () => {
             <TouchableRipple
               style={{ height: 40, justifyContent: "center", paddingLeft: 10 }}
               onPress={() => {
-                navigation.navigate("PDF", {
-                  title: item.title,
-                  uri: item.uri,
-                });
+                openWebBrowser(item.attachment.url);
                 hideDialog();
               }}
             >
@@ -114,11 +150,11 @@ const CourseWeekly = () => {
         title={item.title}
         onPress={() => {
           if (type === "attachments") {
-            navigation.navigate("PDF", { title: item.title, uri: item.uri });
+            openWebBrowser(item.attachment.url);
           } else if (type === "assignments") {
-            navigation.navigate("SubmitAssignment", { title: item.title });
+            navigation.navigate("SubmitAssignment", { item });
           } else {
-            navigation.navigate("Video", { item, lectures });
+            navigation.navigate("Video", { item });
           }
         }}
         description={item.description}
@@ -139,7 +175,7 @@ const CourseWeekly = () => {
               <List.Icon {...props} icon="close" color="red" />
             )}
             {type === "attachments" && (
-              <List.Icon {...props} icon="file-pdf-outline" />
+              <List.Icon {...props} icon="file-download-outline" />
             )}
           </View>
         )}
@@ -150,7 +186,7 @@ const CourseWeekly = () => {
   const renderWeekly = ({ item }) => {
     return (
       <List.Accordion
-        title={item.week}
+        title={`${item.week}주차`}
         id={`${item.week}week`}
         left={(props) => <List.Icon {...props} icon="view-week" />}
         titleStyle={{ fontFamily: "Square", fontWeight: "bold", fontSize: 20 }}
@@ -178,7 +214,7 @@ const CourseWeekly = () => {
                   renderItem={(item) =>
                     renderContents(item, { type: "lectures" })
                   }
-                  keyExtractor={(item) => item.uuid}
+                  keyExtractor={(item) => item._id}
                 />
               </List.Accordion>
             </View>
@@ -201,7 +237,7 @@ const CourseWeekly = () => {
                   renderItem={(item) =>
                     renderContents(item, { type: "assignments" })
                   }
-                  keyExtractor={(item) => item.uuid}
+                  keyExtractor={(item) => item._id}
                 />
               </List.Accordion>
             </View>
@@ -224,7 +260,7 @@ const CourseWeekly = () => {
                   renderItem={(item) =>
                     renderContents(item, { type: "attachments" })
                   }
-                  keyExtractor={(item) => item.uuid}
+                  keyExtractor={(item) => item._id}
                 />
               </List.Accordion>
             </View>
@@ -240,7 +276,8 @@ const CourseWeekly = () => {
         <FlatList
           data={response}
           renderItem={renderWeekly}
-          keyExtractor={(item) => item.week}
+          keyExtractor={(item) => item.week.toString()}
+          contentContainerStyle={{ paddingBottom: 60 }}
         />
       </List.AccordionGroup>
       <Portal>
@@ -282,193 +319,343 @@ const styles = StyleSheet.create({
 
 const response = [
   {
-    week: "1",
+    week: 1,
     lectures: [
       {
-        uuid: "5",
-        title: "string",
-        description: "string",
-        videoUri:
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-        comments: [
-          {
-            user: {
-              uuid: "string",
-              name: "string",
-              type: ["student", "instructor"],
-            },
-            body: "string",
-            isModified: "boolean",
-            createdAt: "date",
-            updatedAT: "date",
-          },
-        ],
+        attachments: [],
+        _id: "5fc6d9d22fb7d97fee7f3e07",
+        class: "5fc6aa7d11dbf95b4c634205",
+        number: 1,
+        title: "1-1 번째 강의 올시다~~ ^^",
+        description: "강의 잘보고 계시네요^^..",
+        week: 1,
+        comments: [],
+        video: {
+          _id: "5fc6d9d22fb7d97fee7f3e08",
+          key:
+            "/uploads/courses/123456/class/3/week1/lecture1/1606867410215-KakaoTalk_20201202_085849843.mp4",
+          url:
+            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week1/lecture1/1606867410215-KakaoTalk_20201202_085849843.mp4",
+          size: 385932,
+        },
+        createdAt: "2020-12-02T00:03:30.490Z",
+        updatedAt: "2020-12-02T00:03:30.490Z",
+        __v: 0,
       },
       {
-        uuid: "6",
-        title: "string",
-        description: "string",
-        videoUri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-        comments: [
-          {
-            user: {
-              uuid: "string",
-              name: "string",
-              type: ["student", "instructor"],
-            },
-            body: "string",
-            isModified: "boolean",
-            createdAt: "date",
-            updatedAT: "date",
-          },
-        ],
+        attachments: [],
+        _id: "5fc6d9d62fb7d97fee7f3e09",
+        class: "5fc6aa7d11dbf95b4c634205",
+        number: 2,
+        title: "1-2 번째 강의 올시다~~ ^^",
+        week: 1,
+        comments: [],
+        video: {
+          _id: "5fc6d9d72fb7d97fee7f3e0a",
+          key:
+            "/uploads/courses/123456/class/3/week1/lecture2/1606867414971-KakaoTalk_20201202_085849843.mp4",
+          url:
+            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week1/lecture2/1606867414971-KakaoTalk_20201202_085849843.mp4",
+          size: 385932,
+        },
+        createdAt: "2020-12-02T00:03:35.167Z",
+        updatedAt: "2020-12-02T00:03:35.167Z",
+        __v: 0,
+      },
+      {
+        attachments: [],
+        _id: "5fc6d9dd2fb7d97fee7f3e0b",
+        class: "5fc6aa7d11dbf95b4c634205",
+        number: 3,
+        title: "1-3 번째 강의 올시다~~ ^^",
+        week: 1,
+        comments: [],
+        video: {
+          _id: "5fc6d9dd2fb7d97fee7f3e0c",
+          key:
+            "/uploads/courses/123456/class/3/week1/lecture3/1606867421165-KakaoTalk_20201202_085849843.mp4",
+          url:
+            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week1/lecture3/1606867421165-KakaoTalk_20201202_085849843.mp4",
+          size: 385932,
+        },
+        createdAt: "2020-12-02T00:03:41.402Z",
+        updatedAt: "2020-12-02T00:03:41.402Z",
+        __v: 0,
       },
     ],
     assignments: [
       {
-        uuid: "7",
-        title: "string",
-        description: "string",
-        submissionRate: "number",
-        calendarItem: "undefined",
-        duration: {
-          status: "string",
-          start: "date",
-          end: "date",
-          period: "string",
+        attachments: [],
+        _id: "5fc6d9dd2fb7d97fee7f3e0b",
+        class: "5fc6aa7d11dbf95b4c634205",
+        number: 3,
+        title: "1-3 번째 강의 올시다~~ ^^",
+        week: 1,
+        comments: [],
+        video: {
+          _id: "5fc6d9dd2fb7d97fee7f3e0c",
+          key:
+            "/uploads/courses/123456/class/3/week1/lecture3/1606867421165-KakaoTalk_20201202_085849843.mp4",
+          url:
+            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week1/lecture3/1606867421165-KakaoTalk_20201202_085849843.mp4",
+          size: 385932,
         },
-        student: {
-          status: "string",
-          score: "number",
-          submissionUri: "string",
-        },
-      },
-      {
-        uuid: "8",
-        title: "string",
-        description: "string",
-        submissionRate: "number",
-        calendarItem: "undefined",
-        duration: {
-          status: "string",
-          start: "date",
-          end: "date",
-          period: "string",
-        },
-        student: {
-          status: "string",
-          score: "number",
-          submissionUri: "string",
-        },
+        createdAt: "2020-12-02T00:03:41.402Z",
+        updatedAt: "2020-12-02T00:03:41.402Z",
+        __v: 0,
       },
     ],
-    attachments: [
+    attachments: [],
+  },
+  {
+    week: 2,
+    lectures: [
       {
-        uuid: "9",
-        title: "string",
-        description: "string",
-        uri:
-          "http://www.eduever.com/upload/board/%C4%C4%C7%BB%C5%CD%20%C0%CF%B9%DD%20%C5%EB%C7%D5%B1%B3%BE%C8(%C3%E2%B7%C2%BF%EB).pdf",
-        comments: [
-          {
-            user: {
-              uuid: "string",
-              name: "string",
-              type: ["student", "instructor"],
-            },
-            body: "string",
-            isModified: "boolean",
-            createdAt: "date",
-            updatedAT: "date",
-          },
-        ],
+        attachments: [],
+        _id: "5fc6d9e22fb7d97fee7f3e0d",
+        class: "5fc6aa7d11dbf95b4c634205",
+        number: 1,
+        title: "2-3 번째 강의 올시다~~ ^^",
+        week: 2,
+        comments: [],
+        video: {
+          _id: "5fc6d9e22fb7d97fee7f3e0e",
+          key:
+            "/uploads/courses/123456/class/3/week2/lecture1/1606867426355-KakaoTalk_20201202_085849843.mp4",
+          url:
+            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week2/lecture1/1606867426355-KakaoTalk_20201202_085849843.mp4",
+          size: 385932,
+        },
+        createdAt: "2020-12-02T00:03:46.607Z",
+        updatedAt: "2020-12-02T00:03:46.607Z",
+        __v: 0,
       },
       {
-        uuid: "10",
-        title: "string",
-        description: "string",
-        uri: "http://techslides.com/demos/sample-videos/small.mp4",
-        comments: [
-          {
-            user: {
-              uuid: "string",
-              name: "string",
-              type: ["student", "instructor"],
-            },
-            body: "string",
-            isModified: "boolean",
-            createdAt: "date",
-            updatedAT: "date",
-          },
-        ],
+        attachments: [],
+        _id: "5fc6d9e72fb7d97fee7f3e0f",
+        class: "5fc6aa7d11dbf95b4c634205",
+        number: 2,
+        title: "2-2 번째 강의 올시다~~ ^^",
+        week: 2,
+        comments: [],
+        video: {
+          _id: "5fc6d9e72fb7d97fee7f3e10",
+          key:
+            "/uploads/courses/123456/class/3/week2/lecture2/1606867431042-KakaoTalk_20201202_085849843.mp4",
+          url:
+            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week2/lecture2/1606867431042-KakaoTalk_20201202_085849843.mp4",
+          size: 385932,
+        },
+        createdAt: "2020-12-02T00:03:51.249Z",
+        updatedAt: "2020-12-02T00:03:51.249Z",
+        __v: 0,
+      },
+      {
+        attachments: [],
+        _id: "5fc6d9eb2fb7d97fee7f3e11",
+        class: "5fc6aa7d11dbf95b4c634205",
+        number: 3,
+        title: "2-1 번째 강의 올시다~~ ^^",
+        week: 2,
+        comments: [],
+        video: {
+          _id: "5fc6d9eb2fb7d97fee7f3e12",
+          key:
+            "/uploads/courses/123456/class/3/week2/lecture3/1606867435525-KakaoTalk_20201202_085849843.mp4",
+          url:
+            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week2/lecture3/1606867435525-KakaoTalk_20201202_085849843.mp4",
+          size: 385932,
+        },
+        createdAt: "2020-12-02T00:03:55.768Z",
+        updatedAt: "2020-12-02T00:03:55.768Z",
+        __v: 0,
+      },
+      {
+        attachments: [],
+        _id: "5fc6d9ef2fb7d97fee7f3e13",
+        class: "5fc6aa7d11dbf95b4c634205",
+        number: 4,
+        title: "1-1 번째 강의 올시다~~ ^^",
+        week: 2,
+        comments: [],
+        video: {
+          _id: "5fc6d9ef2fb7d97fee7f3e14",
+          key:
+            "/uploads/courses/123456/class/3/week2/lecture4/1606867439042-KakaoTalk_20201202_085849843.mp4",
+          url:
+            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week2/lecture4/1606867439042-KakaoTalk_20201202_085849843.mp4",
+          size: 385932,
+        },
+        createdAt: "2020-12-02T00:03:59.302Z",
+        updatedAt: "2020-12-02T00:03:59.302Z",
+        __v: 0,
+      },
+    ],
+    assignments: [],
+    attachments: [
+      {
+        _id: "5fc6da1b2fb7d97fee7f3e15",
+        class: "5fc6aa7d11dbf95b4c634205",
+        number: 1,
+        week: 2,
+        title: "첫 번째 과제",
+        description: "개강 후 첫 번째 과제입니다. ",
+        comments: [],
+        attachment: {
+          _id: "5fc6da1c2fb7d97fee7f3e16",
+          key:
+            "/uploads/courses/123456/class/3/week2/attachments/1606867483888-2004-ubuntu.png",
+          url:
+            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week2/attachments/1606867483888-2004-ubuntu.png",
+          size: 145862,
+        },
+        __v: 0,
       },
     ],
   },
   {
-    week: "2",
+    week: 3,
+    lectures: [],
+    assignments: [],
+    attachments: [],
+  },
+  {
+    week: 4,
     lectures: [
       {
-        uuid: "11",
-        title: "string",
-        description: "string",
-        videoUri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-        comments: [
-          {
-            user: {
-              uuid: "string",
-              name: "string",
-              type: ["student", "instructor"],
-            },
-            body: "string",
-            isModified: "boolean",
-            createdAt: "date",
-            updatedAT: "date",
-          },
-        ],
+        attachments: [],
+        _id: "5fc6d9c32fb7d97fee7f3e03",
+        class: "5fc6aa7d11dbf95b4c634205",
+        number: 1,
+        title: "4-2 번째 강의 올시다~~ ^^",
+        week: 4,
+        comments: [],
+        video: {
+          _id: "5fc6d9c32fb7d97fee7f3e04",
+          key:
+            "/uploads/courses/123456/class/3/week4/lecture1/1606867395522-KakaoTalk_20201202_085849843.mp4",
+          url:
+            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week4/lecture1/1606867395522-KakaoTalk_20201202_085849843.mp4",
+          size: 385932,
+        },
+        createdAt: "2020-12-02T00:03:15.857Z",
+        updatedAt: "2020-12-02T00:03:15.857Z",
+        __v: 0,
       },
-    ],
-    assignments: [
       {
-        uuid: "12",
-        title: "string",
-        description: "string",
-        submissionRate: "number",
-        calendarItem: "undefined",
-        duration: {
-          status: "string",
-          start: "date",
-          end: "date",
-          period: "string",
+        attachments: [],
+        _id: "5fc6d9c92fb7d97fee7f3e05",
+        class: "5fc6aa7d11dbf95b4c634205",
+        number: 2,
+        title: "4-1 번째 강의 올시다~~ ^^",
+        week: 4,
+        comments: [],
+        video: {
+          _id: "5fc6d9ca2fb7d97fee7f3e06",
+          key:
+            "/uploads/courses/123456/class/3/week4/lecture2/1606867401964-KakaoTalk_20201202_085849843.mp4",
+          url:
+            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week4/lecture2/1606867401964-KakaoTalk_20201202_085849843.mp4",
+          size: 385932,
         },
-        student: {
-          status: "string",
-          score: "number",
-          submissionUri: "string",
-        },
+        createdAt: "2020-12-02T00:03:22.219Z",
+        updatedAt: "2020-12-02T00:03:22.219Z",
+        __v: 0,
       },
     ],
+    assignments: [],
     attachments: [
       {
-        uuid: "13",
-        title: "string",
-        description: "string",
-        uri:
-          "https://blackboard.sejong.ac.kr/bbcswebdav/pid-2456812-dt-content-rid-9152629_1/xid-9152629_1",
-        comments: [
-          {
-            user: {
-              uuid: "string",
-              name: "string",
-              type: ["student", "instructor"],
-            },
-            body: "string",
-            isModified: "boolean",
-            createdAt: "date",
-            updatedAT: "date",
-          },
-        ],
+        _id: "5fc6da262fb7d97fee7f3e17",
+        class: "5fc6aa7d11dbf95b4c634205",
+        number: 1,
+        week: 4,
+        title: "두 번째 과제",
+        description: "개강 후 첫 번째 과제입니다. ",
+        comments: [],
+        attachment: {
+          _id: "5fc6da272fb7d97fee7f3e18",
+          key:
+            "/uploads/courses/123456/class/3/week4/attachments/1606867494822-2004-ubuntu.png",
+          url:
+            "https://blackboard.sejong.ac.kr/bbcswebdav/pid-2456814-dt-content-rid-7645394_1/xid-7645394_1",
+          size: 145862,
+        },
+        __v: 0,
       },
     ],
+  },
+  {
+    week: 5,
+    lectures: [],
+    assignments: [],
+    attachments: [],
+  },
+  {
+    week: 6,
+    lectures: [],
+    assignments: [],
+    attachments: [],
+  },
+  {
+    week: 7,
+    lectures: [],
+    assignments: [],
+    attachments: [],
+  },
+  {
+    week: 8,
+    lectures: [],
+    assignments: [],
+    attachments: [],
+  },
+  {
+    week: 9,
+    lectures: [],
+    assignments: [],
+    attachments: [],
+  },
+  {
+    week: 10,
+    lectures: [],
+    assignments: [],
+    attachments: [],
+  },
+  {
+    week: 11,
+    lectures: [],
+    assignments: [],
+    attachments: [],
+  },
+  {
+    week: 12,
+    lectures: [],
+    assignments: [],
+    attachments: [],
+  },
+  {
+    week: 13,
+    lectures: [],
+    assignments: [],
+    attachments: [],
+  },
+  {
+    week: 14,
+    lectures: [],
+    assignments: [],
+    attachments: [],
+  },
+  {
+    week: 15,
+    lectures: [],
+    assignments: [],
+    attachments: [],
+  },
+  {
+    week: 16,
+    lectures: [],
+    assignments: [],
+    attachments: [],
   },
 ];
 
