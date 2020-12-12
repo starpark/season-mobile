@@ -14,7 +14,7 @@ export const BottomMenuItem = ({ iconName, isCurrent }) => {
       <MaterialCommunityIcons
         name={iconName}
         size={32}
-        style={{ color: isCurrent ? "#DC143C" : "grey" }}
+        style={{ color: isCurrent ? "#DC143C" : "gray" }}
       />
     </View>
   );
