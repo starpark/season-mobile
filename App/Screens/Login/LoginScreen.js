@@ -12,12 +12,12 @@ import { useSelector, useDispatch } from "react-redux";
 import Actions from "../../Redux/Actions";
 import { HelperText, TextInput } from "react-native-paper";
 import Global from "../../Styles/GlobalStyles";
+import * as SecureStore from "expo-secure-store";
 
 const Login = ({ navigation }) => {
   const [studentID, onChangeID] = React.useState("");
   const [studentPW, onChangePW] = React.useState("");
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.Auth);
 
   React.useEffect(() => {
     // dispatch(Actions.APIAction.API_CALL());
@@ -25,6 +25,22 @@ const Login = ({ navigation }) => {
     //   dispatch(Actions.APIAction.API_END());
     // }, 3000);
   }, []);
+
+  const handleLogin = async () => {
+    console.log(`학번: ${studentID}/비밀번호: ${studentPW}`);
+    const userInfo = {
+      studentID,
+      studentPW,
+    };
+    const response = {
+      // 서버측 응답 예시
+      name: "박별",
+      role: "student",
+      token: "token123",
+    };
+    SecureStore.setItemAsync("myToken", response.token);
+    dispatch(Actions.AuthAction.LOGIN(response.role));
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -57,16 +73,7 @@ const Login = ({ navigation }) => {
         학번/아이디 또는 비밀번호가 일치하지 않습니다.
       </HelperText>
 
-      <TouchableWithoutFeedback
-        onPress={() => {
-          console.log(`학번: ${studentID}/비밀번호: ${studentPW}`);
-          const userInfo = {
-            studentID,
-            studentPW,
-          };
-          dispatch(Actions.AuthAction.LOGIN(userInfo));
-        }}
-      >
+      <TouchableWithoutFeedback onPress={handleLogin}>
         <View style={styles.loginbutton}>
           <Text style={styles.logintext}>로그인</Text>
         </View>

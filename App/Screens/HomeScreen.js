@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Global from "../Styles/GlobalStyles";
 import { Text, TouchableRipple, IconButton } from "react-native-paper";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Foundation, MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 import Action from "../Redux/Actions";
 import { ScrollView } from "react-native-gesture-handler";
