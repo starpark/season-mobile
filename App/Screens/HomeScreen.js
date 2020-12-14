@@ -134,11 +134,11 @@ const Home = () => {
             </View>
             <View style={{ marginBottom: 10 }}>
               <View style={styless.item_tasktracker_due_box}>
-                <Text style={styless.item_tasktracker_due_content}>D-7</Text>
+                <Text style={styless.item_tasktracker_due_content}>오늘</Text>
                 <Text>{item.due[0].title}</Text>
               </View>
               <View style={styless.item_tasktracker_due_box}>
-                <Text style={styless.item_tasktracker_due_content}>D-7</Text>
+                <Text style={styless.item_tasktracker_due_content}>D-1</Text>
                 <Text>{item.due[1].title}</Text>
               </View>
             </View>
