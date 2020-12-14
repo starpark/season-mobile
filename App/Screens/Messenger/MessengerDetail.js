@@ -94,10 +94,6 @@ const MessengerDetail = () => {
       (today.getTime() - timeValue.getTime()) / 1000 / 60
     );
 
-
-
-    const betweenTimeHour = Math.floor(betweenTime / 60);
-    console.log(betweenTimeHour);
     if (today.getDay() - timeValue.getDay() === 0) {
       return `${ampm} ${hours}:${minutes}`
     }
