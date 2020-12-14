@@ -50,7 +50,7 @@ export const ENTRIES1 = [
     ],
   },
   {
-    title: "자기주도창의전공III (003)",
+    title: "자기주도창의전공III (002)",
     instructor: "안용학",
     score: {
       max: 100,
