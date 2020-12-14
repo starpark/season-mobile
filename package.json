@@ -56,7 +56,8 @@
     "react-native-web": "~0.11.7",
     "react-native-webview": "9.4.0",
     "react-redux": "^7.2.2",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "sendbird": "^3.0.140"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
