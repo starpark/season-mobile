@@ -1,8 +1,8 @@
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import HomeStack from "../Navigation/HomeStack";
-import MessengerScreen from "../Screens/MessengerScreen";
+import HomeStack from "./HomeStack";
+import MessengerScreen from "../Screens/Messenger/MessengerScreen";
 import CalendarScreen from "../Screens/CalendarScreen";
 import SettingScreen from "../Screens/Settings/SettingScreen";
 import CommunityScreen from "../Screens/CommunityScreen";
