@@ -28,49 +28,49 @@ const MessengerScreen = () => {
     c.unshift(channel);
     setChannels(c);
   };
-  channelHandler.onMessageUpdated = function (channel, message) { };
-  channelHandler.onMentionReceived = function (channel, message) { };
+  channelHandler.onMessageUpdated = function (channel, message) {};
+  channelHandler.onMentionReceived = function (channel, message) {};
   channelHandler.onChannelChanged = function (channel) {
     let c = channels;
     c = c.filter((item) => item.url !== channel.url);
     c.unshift(channel);
     setChannels(c);
   };
-  channelHandler.onChannelDeleted = function (channelUrl, channelType) { };
-  channelHandler.onChannelFrozen = function (channel) { };
-  channelHandler.onChannelUnfrozen = function (channel) { };
-  channelHandler.onMetaDataCreated = function (channel, metaData) { };
-  channelHandler.onMetaDataUpdated = function (channel, metaData) { };
-  channelHandler.onMetaDataDeleted = function (channel, metaDataKeys) { };
-  channelHandler.onMetaCountersCreated = function (channel, metaCounter) { };
-  channelHandler.onMetaCountersUpdated = function (channel, metaCounter) { };
-  channelHandler.onMetaCountersDeleted = function (channel, metaCounterKeys) { };
-  channelHandler.onChannelHidden = function (groupChannel) { };
+  channelHandler.onChannelDeleted = function (channelUrl, channelType) {};
+  channelHandler.onChannelFrozen = function (channel) {};
+  channelHandler.onChannelUnfrozen = function (channel) {};
+  channelHandler.onMetaDataCreated = function (channel, metaData) {};
+  channelHandler.onMetaDataUpdated = function (channel, metaData) {};
+  channelHandler.onMetaDataDeleted = function (channel, metaDataKeys) {};
+  channelHandler.onMetaCountersCreated = function (channel, metaCounter) {};
+  channelHandler.onMetaCountersUpdated = function (channel, metaCounter) {};
+  channelHandler.onMetaCountersDeleted = function (channel, metaCounterKeys) {};
+  channelHandler.onChannelHidden = function (groupChannel) {};
   channelHandler.onUserReceivedInvitation = function (
     groupChannel,
     inviter,
     invitees
-  ) { };
+  ) {};
   channelHandler.onUserDeclinedInvitation = function (
     groupChannel,
     inviter,
     invitee
-  ) { };
+  ) {};
   channelHandler.onUserJoined = function (groupChannel, user) {
     let c = channels;
     c.unshift(groupChannel);
     setChannels(c);
   };
-  channelHandler.onUserLeft = function (groupChannel, user) { };
-  channelHandler.onDeliveryReceiptUpdated = function (groupChannel) { };
-  channelHandler.onReadReceiptUpdated = function (groupChannel) { };
-  channelHandler.onTypingStatusUpdated = function (groupChannel) { };
-  channelHandler.onUserEntered = function (openChannel, user) { };
-  channelHandler.onUserExited = function (openChannel, user) { };
-  channelHandler.onUserMuted = function (channel, user) { };
-  channelHandler.onUserUnmuted = function (channel, user) { };
-  channelHandler.onUserBanned = function (channel, user) { };
-  channelHandler.onUserUnbanned = function (channel, user) { };
+  channelHandler.onUserLeft = function (groupChannel, user) {};
+  channelHandler.onDeliveryReceiptUpdated = function (groupChannel) {};
+  channelHandler.onReadReceiptUpdated = function (groupChannel) {};
+  channelHandler.onTypingStatusUpdated = function (groupChannel) {};
+  channelHandler.onUserEntered = function (openChannel, user) {};
+  channelHandler.onUserExited = function (openChannel, user) {};
+  channelHandler.onUserMuted = function (channel, user) {};
+  channelHandler.onUserUnmuted = function (channel, user) {};
+  channelHandler.onUserBanned = function (channel, user) {};
+  channelHandler.onUserUnbanned = function (channel, user) {};
 
   // Add this channel event handler to the `SendBird` instance.
   sb.addChannelHandler("UNIQUE_HANDLER_ID", channelHandler);
@@ -89,7 +89,6 @@ const MessengerScreen = () => {
         setChannels(GroupChannels);
       });
     }
-
   }, []);
 
   const getLastMsgDate = (value) => {
@@ -99,12 +98,12 @@ const MessengerScreen = () => {
     let hours = timeValue.getHours();
     let minutes = timeValue.getMinutes();
     minutes = minutes >= 10 ? minutes : "0" + minutes;
-    var ampm = hours >= 12 ? '오후' : '오전';
+    var ampm = hours >= 12 ? "오후" : "오전";
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
 
     if (today.getDay() - timeValue.getDay() === 0) {
-      return `${ampm} ${hours}:${minutes}`
+      return `${ampm} ${hours}:${minutes}`;
     }
 
     var year = timeValue.getFullYear(); //yyyy
