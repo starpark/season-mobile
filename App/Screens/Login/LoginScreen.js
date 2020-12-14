@@ -12,9 +12,12 @@ import { useSelector, useDispatch } from "react-redux";
 import Actions from "../../Redux/Actions";
 import { HelperText, TextInput } from "react-native-paper";
 import Global from "../../Styles/GlobalStyles";
+import SendBird from "sendbird";
+import { APP_ID } from "../../Config";
 import * as SecureStore from "expo-secure-store";
 
 const Login = ({ navigation }) => {
+  const sb = new SendBird({ appId: APP_ID });
   const [studentID, onChangeID] = React.useState("");
   const [studentPW, onChangePW] = React.useState("");
   const dispatch = useDispatch();
@@ -35,11 +38,25 @@ const Login = ({ navigation }) => {
     const response = {
       // 서버측 응답 예시
       name: "박별",
+      id: studentID,
       role: "student",
       token: "token123",
     };
     SecureStore.setItemAsync("myToken", response.token);
-    dispatch(Actions.AuthAction.LOGIN(response.role));
+    dispatch(Actions.AuthAction.LOGIN(response));
+    sb.connect(response.id, (user, error) => {
+      if (error) {
+        console.error(error);
+      } else {
+        sb.updateCurrentUserInfo(response.name, null, (user, error) => {
+          if (error) {
+            console.error(error);
+          } else {
+          }
+        });
+
+      }
+    });
   };
 
   return (
