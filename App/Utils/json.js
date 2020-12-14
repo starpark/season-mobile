@@ -1,6 +1,6 @@
 export const ENTRIES1 = [
   {
-    title: "자기주도창의전공 I (002)",
+    title: "자기주도창의전공 I",
     instructor: "안용학",
     score: {
       max: 100,
@@ -25,7 +25,7 @@ export const ENTRIES1 = [
     ],
   },
   {
-    title: "자기주도창의전공 II (002)",
+    title: "자기주도창의전공 II",
     instructor: "안용학",
     score: {
       max: 100,
@@ -50,7 +50,32 @@ export const ENTRIES1 = [
     ],
   },
   {
-    title: "자기주도창의전공III (002)",
+    title: "자기주도창의전공III",
+    instructor: "안용학",
+    score: {
+      max: 100,
+      now: 100,
+    },
+    attendance: {
+      max: 20,
+      now: 4,
+    },
+    learningTime: 30,
+    notice: {
+      0: "공지사항 5",
+      1: "공지사항 6",
+    },
+    lecture: {
+      0: "11장 1강",
+      1: "11장 2강",
+    },
+    due: [
+      { title: "과제1", end: "2020-12-10T07:50:45.997Z" },
+      { title: "영상1", end: "2020-12-10T07:50:45.997Z" },
+    ],
+  },
+  {
+    title: "자기주도창의전공IV",
     instructor: "안용학",
     score: {
       max: 100,
