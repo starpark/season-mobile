@@ -4956,11 +4956,6 @@ react-native-screens@~2.9.0:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.9.0.tgz#ead2843107ba00fee259aa377582e457c74f1f3b"
   integrity sha512-5MaiUD6HA3nzY3JbVI8l3V7pKedtxQF3d8qktTVI0WmWXTI4QzqOU8r8fPVvfKo3MhOXwhWBjr+kQ7DZaIQQeg==
 
-react-native-skeleton-placeholder@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-skeleton-placeholder/-/react-native-skeleton-placeholder-3.0.1.tgz#2eb7bc10a9fe4d15d9341887771772588f3d9e02"
-  integrity sha512-u+xmMrAcbSeq4T0hzGBigGsWM0r+RhchP9KF6r3iker7QDDPttUb80gJ6YvUnw4Aq/yXNT41pUL9zB/lTn3ddg==
-
 react-native-svg@^12.1.0:
   version "12.1.0"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.1.0.tgz#acfe48c35cd5fca3d5fd767abae0560c36cfc03d"
@@ -5338,14 +5333,7 @@ send@0.17.1:
     range-parser "~1.2.1"
     statuses "~1.5.0"
 
-sendbird-syncmanager@^1.1.21:
-  version "1.1.21"
-  resolved "https://registry.yarnpkg.com/sendbird-syncmanager/-/sendbird-syncmanager-1.1.21.tgz#eb04c8a6571e542186dcb6e59444330982d29e43"
-  integrity sha512-jg+Hyz+NSgVQ4zKkclGBkJzToiHZbXALmXu92mfkbPIItVa4qVWMghmJ+lmgz0LboLqBV44bemOHP71fX5RyLw==
-  dependencies:
-    sendbird ">=3.0.121"
-
-sendbird@>=3.0.121, sendbird@^3.0.140:
+sendbird@^3.0.140:
   version "3.0.140"
   resolved "https://registry.yarnpkg.com/sendbird/-/sendbird-3.0.140.tgz#4f70f0586db8fb8daea9ee2b48fafd39e9db741a"
   integrity sha512-miUEJZaZ1W0tv+iwQC/aF50sijIX5CAc1wLOLfWi8ybA6q9160g/Yvocb/BGUzbfhTAyodbYCIV5OhJPCOpQ8A==
