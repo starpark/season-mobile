@@ -175,7 +175,7 @@ const CalendarScreen = () => {
                   <Text>과제1</Text>
                 </View>
               </View>
-              <View
+              {/* <View
                 style={{
                   flexDirection: "row",
                   height: 100,
@@ -204,7 +204,7 @@ const CalendarScreen = () => {
                   </Text>
                   <Text>시험1</Text>
                 </View>
-              </View>
+              </View> */}
               <View
                 style={{
                   flexDirection: "row",
