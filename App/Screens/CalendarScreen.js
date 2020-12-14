@@ -170,9 +170,39 @@ const CalendarScreen = () => {
                 />
                 <View style={{ padding: 5 }}>
                   <Text style={{ fontFamily: "Square", fontSize: 17 }}>
-                    자기주도창의전공 I (002)
+                    자기주도창의전공 I
                   </Text>
                   <Text>과제1</Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  height: 100,
+                  marginVertical: 7,
+                  backgroundColor: "white",
+                  shadowColor: "#000",
+                  shadowOffset: {
+                    width: 0,
+                    height: 1,
+                  },
+                  shadowOpacity: 0.2,
+                  shadowRadius: 1.41,
+
+                  elevation: 2,
+                }}
+              >
+                <View
+                  style={{
+                    backgroundColor: Global.Colors.course[0],
+                    width: 3,
+                  }}
+                />
+                <View style={{ padding: 5 }}>
+                  <Text style={{ fontFamily: "Square", fontSize: 17 }}>
+                    자기주도창의전공 I
+                  </Text>
+                  <Text>영상1</Text>
                 </View>
               </View>
               {/* <View
@@ -205,7 +235,7 @@ const CalendarScreen = () => {
                   <Text>시험1</Text>
                 </View>
               </View> */}
-              <View
+              {/* <View
                 style={{
                   flexDirection: "row",
                   height: 100,
@@ -230,11 +260,11 @@ const CalendarScreen = () => {
                 />
                 <View style={{ padding: 5 }}>
                   <Text style={{ fontFamily: "Square", fontSize: 17 }}>
-                    자기주도창의전공 III (002)
+                    자기주도창의전공 I
                   </Text>
-                  <Text>영상1</Text>
+                  <Text>15장 1강</Text>
                 </View>
-              </View>
+              </View> */}
             </View>
           </View>
         </ScrollView>

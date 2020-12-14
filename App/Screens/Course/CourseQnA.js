@@ -15,103 +15,10 @@ const { width: screenWidth } = Dimensions.get("window");
 
 const response = [
   {
-    title: "교수님 질문이요!!!!!!!!!!1",
-    body: "<span>아령하세여</span>",
-    issuer: "string",
+    title: "교수님 질문있습니다.",
+    body: "<span>Expo가 궁금합니다.</span>",
+    issuer: "박별",
     createdAt: "2020-11-24T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "교수님 질문이요!!!!!!!!!!1",
-    body:
-      "<a href='https://learn-ap-northeast-2-prod-fleet01-xythos.content.blackboardcdn.com/5cf774ff89eaf/3508111?X-Blackboard-Expiration=1606759200000&X-Blackboard-Signature=O3KAXZyGt3p2s%2FuXSFy6w1VL7AajzG6AY9T2X9oQXJ0%3D&X-Blackboard-Client-Id=513122&response-cache-control=private%2C%20max-age%3D21600&response-content-disposition=inline%3B%20filename%2A%3DUTF-8%27%27C1.pdf&response-content-type=application%2Fpdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20201130T120000Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21600&X-Amz-Credential=AKIAZH6WM4PLRAIZCZRQ%2F20201130%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=dd02230831e326427eae01d0a7403fe8be607da03a32e6383b3b1555288ede67'> rr </a>",
-    issuer: "string",
-    createdAt: "2020-11-24T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "교수님 질문이요!!!!!!!!!!1",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-24T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "교수님 질문이요!!!!!!!!!!1",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-24T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "교수님 질문이요!!!!!!!!!!1",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-24T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "교수님 질문이요!!!!!!!!!!1",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "교수님 질문이요!!!!!!!!!!1",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "교수님 질문이요!!!!!!!!!!1",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "교수님 질문이요!!!!!!!!!!1",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "교수님 질문이요!!!!!!!!!!1",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "교수님 질문이요!!!!!!!!!!1",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-23T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "교수님 질문이요!!!!!!!!!!1",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-22T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title: "교수님 질문이요!!!!!!!!!!1",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-22T07:50:45.997Z",
-    updatedAt: "date",
-  },
-  {
-    title:
-      "교수님 질문이요!!!!!!!!!!1교수님 질문이요!!!!!!!!!!1교수님 질문이요!!!!!!!!!!1교수님 질문이요!!!!!!!!!!1교수님 질문이요!!!!!!!!!!1교수님 질문이요!!!!!!!!!!1교수님 질문이요!!!!!!!!!!1교수님 질문이요!!!!!!!!!!1",
-    body: "string",
-    issuer: "string",
-    createdAt: "2020-11-10T07:50:45.997Z",
     updatedAt: "date",
   },
 ];
@@ -182,7 +89,7 @@ const CourseQnA = () => {
               color={Global.Colors.sjred}
               style={{ marginHorizontal: 5 }}
             />
-            <Text>0</Text>
+            <Text>2</Text>
           </View>
 
           <Entypo

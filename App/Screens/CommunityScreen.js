@@ -215,7 +215,7 @@ const CommunityScreen = () => {
           showsHorizontalScrollIndicator={false}
           data={newUpload}
           renderItem={renderItem}
-          keyExtractor={(item, index) => `${index}`}
+          keyExtractor={(item, index) => `${index} + ${item.name}`}
           style={{ paddingHorizontal: 20, marginVertical: 20 }}
           contentContainerStyle={{ paddingRight: 80 }}
         />

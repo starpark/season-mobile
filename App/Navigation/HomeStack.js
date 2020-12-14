@@ -359,7 +359,7 @@ const HomeStack = () => {
         name="CourseExam"
         component={CourseExam}
         options={({ route }) => ({
-          // title: route.params.title,
+          title: route.params.title,
           headerTitleStyle: { fontFamily: "Square", fontSize: 16 },
           cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
         })}

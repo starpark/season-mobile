@@ -6,10 +6,11 @@ import { useRoute } from "@react-navigation/native";
 
 import Global from "../../../Styles/GlobalStyles";
 
-const array = [];
-for (let i = 0; i < 50; i++) {
-  array.push({ name: faker.name.findName(), id: faker.random.number() });
-}
+const array = [
+  { name: "박별", id: "17011589", attendance: 14, score: 100 },
+  { name: "이찬형", id: "17011550", attendance: 20, score: 100 },
+  { name: "차재윤", id: "17011479", attendance: 17, score: 100 },
+];
 array.sort((a, b) => {
   return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 });
@@ -54,8 +55,8 @@ const CourseInstructorAttendance = () => {
             <DataTable.Row key={item.id} onPress={() => console.log(1)}>
               <DataTable.Cell>{item.id}</DataTable.Cell>
               <DataTable.Cell>{item.name}</DataTable.Cell>
-              <DataTable.Cell numeric>15</DataTable.Cell>
-              <DataTable.Cell numeric>15</DataTable.Cell>
+              <DataTable.Cell numeric>{item.attendance}</DataTable.Cell>
+              <DataTable.Cell numeric>20</DataTable.Cell>
               <DataTable.Cell numeric>100</DataTable.Cell>
             </DataTable.Row>
           ))}

@@ -206,10 +206,10 @@ const Home = () => {
                   </View>
                   <View style={styless.item_tasktracker_content_box}>
                     <Text style={styless.item_tasktracker_content_info}>
-                      {item.attendance.now} 회
+                      1 회
                     </Text>
                     <Text style={styless.item_tasktracker_content_sub}>
-                      / {item.attendance.max}
+                      / 1
                     </Text>
                   </View>
                 </View>

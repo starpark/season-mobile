@@ -18,7 +18,7 @@ const SettingScreen = () => {
           marginTop: 20,
         }}
       >
-        내정보
+        내 정보
       </Text>
       <View
         style={{

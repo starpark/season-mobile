@@ -8,7 +8,7 @@ const CourseMenu = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const now = useSelector((state) => state.Now);
-  const user = "student";
+  const user = "instructor";
 
   return (
     <ScrollView>
@@ -66,22 +66,6 @@ const CourseMenu = () => {
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => {
             navigation.navigate("CourseQnA", { title: now.title });
-          }}
-        />
-        <List.Item
-          title="팀프로젝트"
-          titleStyle={{ fontFamily: "Square" }}
-          right={() => <List.Icon icon="chevron-right" />}
-          onPress={() => {
-            console.log("메뉴");
-          }}
-        />
-        <List.Item
-          title="메신저"
-          titleStyle={{ fontFamily: "Square" }}
-          right={() => <List.Icon icon="chevron-right" />}
-          onPress={() => {
-            console.log("메뉴");
           }}
         />
         <List.Subheader

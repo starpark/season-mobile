@@ -23,7 +23,7 @@ const CourseExamList = () => {
         right={(props) => (
           <IconButton icon="dots-horizontal" size={28} onPress={() => {}} />
         )}
-        onPress={() => navigation.navigate("CourseExam")}
+        onPress={() => navigation.navigate("CourseExam", { title: "시험1" })}
       />
     </ScrollView>
   );

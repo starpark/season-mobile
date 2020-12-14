@@ -39,7 +39,7 @@ const VideoScreen = () => {
     value: 0,
   });
   const [controls, setControls] = React.useState(false);
-  const [learningTime, setLearningTime] = React.useState(500000);
+  const [learningTime, setLearningTime] = React.useState(5000);
   const [
     playbackInstancePosition,
     setPlaybackInstancePosition,

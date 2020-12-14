@@ -6,14 +6,11 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 
 import Global from "../../../Styles/GlobalStyles";
 
-const array = [];
-for (let i = 0; i < 50; i++) {
-  array.push({ name: faker.name.findName(), id: faker.random.number() });
-}
-array.sort((a, b) => {
-  return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
-});
-
+const array = [
+  { name: "박별", id: "17011589", score: 50 },
+  { name: "이찬형", id: "17011550", score: 50 },
+  { name: "차재윤", id: "17011479", score: 50 },
+];
 const itemsPerPage = 10;
 
 const CourseInstructorGradeAssignment = () => {
@@ -57,6 +54,7 @@ const CourseInstructorGradeAssignment = () => {
               onPress={() =>
                 navigation.navigate("GradeAssignmentDetail", {
                   id: item.id,
+                  name: item.name,
                   examid: 1,
                 })
               }
@@ -65,7 +63,7 @@ const CourseInstructorGradeAssignment = () => {
               <DataTable.Cell>{item.name}</DataTable.Cell>
               <DataTable.Cell>제출 완료</DataTable.Cell>
               <DataTable.Cell>채점 완료</DataTable.Cell>
-              <DataTable.Cell numeric>100</DataTable.Cell>
+              <DataTable.Cell numeric>50</DataTable.Cell>
             </DataTable.Row>
           ))}
 

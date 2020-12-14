@@ -175,7 +175,7 @@ const CourseQnADetail = (props) => {
             color={Global.Colors.sjred}
             style={{ marginRight: 10 }}
           />
-          <Text style={{ fontFamily: "Square", fontSize: 20 }}>0개의 답변</Text>
+          <Text style={{ fontFamily: "Square", fontSize: 20 }}>2개의 답변</Text>
         </View>
         <View style={{ marginBottom: 20 }}>
           <TextInput
@@ -222,7 +222,10 @@ const CourseQnADetail = (props) => {
             </View>
           </View>
           <View>
-            <Text>질문이 뭔가요 학생</Text>
+            <Text>
+              Expo는 네이티브 언어의 사용없이 앱을 개발할 수 있도록 해주는
+              프레임워크입니다.
+            </Text>
           </View>
         </View>
         <View style={styles.answer_box}>
@@ -236,30 +239,7 @@ const CourseQnADetail = (props) => {
                   marginHorizontal: 10,
                 }}
               >
-                교수자
-              </Text>
-              <Octicons name="verified" size={15} color="green" />
-            </View>
-            <View>
-              <Text style={{ color: "gray" }}>{timeForToday(new Date())}</Text>
-            </View>
-          </View>
-          <View>
-            <Text>질문이 뭔가요 학생</Text>
-          </View>
-        </View>
-        <View style={styles.answer_box}>
-          <View style={styles.answer_header}>
-            <View style={styles.answer_user}>
-              <FontAwesome5 name="user-alt" size={24} color="black" />
-              <Text
-                style={{
-                  fontFamily: "Square",
-                  fontSize: 20,
-                  marginHorizontal: 10,
-                }}
-              >
-                학생
+                박별
               </Text>
             </View>
             <View>
@@ -267,7 +247,7 @@ const CourseQnADetail = (props) => {
             </View>
           </View>
           <View>
-            <Text>까먹었습니다.</Text>
+            <Text>감사합니다.</Text>
           </View>
         </View>
       </View>

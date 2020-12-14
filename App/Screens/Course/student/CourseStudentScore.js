@@ -6,11 +6,10 @@ import { useRoute } from "@react-navigation/native";
 
 import Global from "../../../Styles/GlobalStyles";
 
-const array = [];
-for (let i = 0; i < 50; i++) {
-  array.push({ contents_name: faker.name.findName() });
-}
-
+const array = [
+  { contents_type: "시험", contents_name: "시험1", score: 50, max_score: 50 },
+  { contents_type: "과제", contents_name: "과제1", score: 50, max_score: 50 },
+];
 const itemsPerPage = 10;
 
 const CourseStudentScore = () => {
@@ -31,11 +30,11 @@ const CourseStudentScore = () => {
         <ScrollView contentContainerStyle={{ paddingBottom: 60 }}>
           {array.slice(from, to - 1).map((item, index) => (
             <DataTable.Row key={index} onPress={() => console.log(1)}>
-              <DataTable.Cell>과제</DataTable.Cell>
+              <DataTable.Cell>{item.contents_type}</DataTable.Cell>
               <DataTable.Cell>{item.contents_name}</DataTable.Cell>
               <DataTable.Cell>2020.11.30</DataTable.Cell>
               <DataTable.Cell>채점완료</DataTable.Cell>
-              <DataTable.Cell numeric>10/20</DataTable.Cell>
+              <DataTable.Cell numeric>50/50</DataTable.Cell>
             </DataTable.Row>
           ))}
 

@@ -334,8 +334,7 @@ const response = [
           _id: "5fc6d9d22fb7d97fee7f3e08",
           key:
             "/uploads/courses/123456/class/3/week1/lecture1/1606867410215-KakaoTalk_20201202_085849843.mp4",
-          url:
-            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week1/lecture1/1606867410215-KakaoTalk_20201202_085849843.mp4",
+          url: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
           size: 385932,
         },
         createdAt: "2020-12-02T00:03:30.490Z",
@@ -486,7 +485,7 @@ const response = [
           key:
             "/uploads/courses/123456/class/3/week2/attachments/1606867483888-2004-ubuntu.png",
           url:
-            "https://season-api-server-repository.s3.ap-northeast-2.amazonaws.com//uploads/courses/123456/class/3/week2/attachments/1606867483888-2004-ubuntu.png",
+            "http://kocw-n.xcache.kinxcdn.com/data/document/2017/duksung/choiseunghoon121/11.pdf",
           size: 145862,
         },
         __v: 0,

@@ -152,7 +152,7 @@ const CourseExam = () => {
             onPress={handleSubmit}
             theme={{ colors: { primary: Global.Colors.sjgray } }}
           >
-            채점
+            제출
           </Button>
         </View>
       </View>
