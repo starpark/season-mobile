@@ -38,7 +38,7 @@ const SettingScreen = () => {
           }}
         >
           <Text style={{ fontFamily: "Square", fontSize: 20 }}>
-            차재윤 17011479
+            박 별 17011589
           </Text>
           <Text
             style={{
@@ -47,7 +47,7 @@ const SettingScreen = () => {
               color: Global.Colors.gray3,
             }}
           >
-            소프트웨어융합대학 컴퓨터공학과 3학년
+            소프트웨어융합대학 컴퓨터공학과 2학년
           </Text>
         </View>
       </View>
