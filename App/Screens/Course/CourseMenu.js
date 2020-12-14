@@ -8,7 +8,7 @@ const CourseMenu = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const now = useSelector((state) => state.Now);
-  const user = "instructor";
+  const user = "student";
 
   return (
     <ScrollView>
